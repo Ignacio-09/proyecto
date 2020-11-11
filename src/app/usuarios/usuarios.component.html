@@ -1,0 +1,148 @@
+<app-menu></app-menu>
+<div class="container mt-3" >
+    <div class="row">
+        <div class="col">
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-primary" id="entrar" data-toggle='modal' data-target='#nuevoUsuario'>Nuevo usuario</button>
+            </div>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>User:</th>
+                        <th>Password:</th>
+                        <th>Nombre:</th>
+                        <th>Tipo:</th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td>{{usuario.user}}</td>
+                        <td>{{usuario.pass}}</td>
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.tipo_user}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mb-3" *ngIf="level=='A'"
+                            (click)="temporalUsuario(usuario)" data-toggle='modal' data-target='#editarUsuario'><i class="fas fa-pen"></i></button>
+                        &nbsp;
+                            <button class="btn btn-danger btn-sm" *ngIf="level=='A'"
+                            (click)="temporalUsuario(usuario)" data-toggle='modal' data-target='#eliminarUsuario'><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Nuevo Usuario -->
+<div class="modal fade" id="nuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Nuevo Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Usuario:</div>
+                    </div>
+                    <input type="text" class="form-control" id="usuarioNuevoUser" placeholder="Usuario"
+                        [(ngModel)]="nuevoUser.user">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Password:</div>
+                    </div>
+                    <input type="password" class="form-control" id="precioNuevoUser" placeholder="Password"
+                        [(ngModel)]="nuevoUser.pass">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nombre:</div>
+                    </div>
+                    <input type="text" class="form-control" id="nombreNuevoUser" placeholder="Nombre"
+                        [(ngModel)]="nuevoUser.nombre">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="agregarUsuario()">Agregar Usuario</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Editar Usuario -->
+<div class="modal fade" id="editarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Editar Usuario</h5>
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nombre:</div>
+                    </div>
+                    <input type="text" class="form-control" id="nombreeditarUser" placeholder="Nombre"
+                        [(ngModel)]="tmpUser.nombre">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Usuario:</div>
+                    </div>
+                    <input type="text" class="form-control" id="usereditarUser" placeholder="Usuario"
+                        [(ngModel)]="tmpUser.user">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Password:</div>
+                    </div>
+                    <input type="text" class="form-control" id="passeditarUser" placeholder="Password"
+                        [(ngModel)]="tmpUser.pass">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="guardarCambios()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Eliminar -->
+<div class="modal fade" id="eliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro que quiere eliminar el usuario {{tmpUser.user}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="confirmarEliminar()">Si</button>
+            </div>
+        </div>
+    </div>
+</div>

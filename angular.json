@@ -24,9 +24,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/css.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
+              "src/assets/js/bootstrap.min.js",              
+              "src/assets/libs/popper.js/1.14.7/umd/popper.min.js",              
+              "src/assets/libs/jquery/3.4.0/jquery.min.js"              
+            ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,47 @@
+    <!--Barra superior redes y menu cuenta-->
+    <!--  Navbar red social-->
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#343a40" class="container-fluid">
+        <div class="media-body"></div>
+        <div class="text-right mr-2">
+        <div class="btn-group" >
+            <button style="margin: 10%;" type="button" class="btn btn-primary dropdown-toggle float-right" data-toggle="dropdown"><i
+                    class="fas fa-user-circle mr-1"></i>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{cuenta}}</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="Inicio.html"><i class="fas fa-cog m-1"></i>Mi cuenta</a>
+                <a class="dropdown-item" routerLink= "/login"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar
+                    sesión</a>
+                <a class="dropdown-item" routerLink= "/registro"><i class="fas fa-user-plus mr-1"></i>Registrase</a>
+                <a class="dropdown-item" (click)="salir()" style="cursor: pointer;"><i class="fas fa-sign-out-alt mr-1"></i>Cerrar
+                    sesion</a>
+            </div>  
+        </div>
+    </div>
+    </nav>
+    <!--Barra de busqueda-->
+    
+<div class="row m-5">
+    <div class="col-sm-4 text-center">
+        <form class="form-inline mt-3" action="/action_page.php">
+            <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+            <button class="btn btn-info" type="submit"><i class="fa fa-search mr-1"></i>Buscar</button>
+        </form>
+    </div>
+    <!--Codigo posicion imagen-->
+    <div class="col-sm-4 text-center mt-2">
+        <div id="_desktop_logo">
+            <a href="#">
+                <img class="logo img-fluid" src="../../assets/img/titulo.png" alt="tecnojaguars-pc">
+            </a>
+        </div>
+    </div>
+    <!--Hipervinculo carrito-->
+    <div class="col-sm-4 text-right">
+        <a class="navbar-brand" href="carrito.html">
+            <img src="../../assets/img/publicitario/carro.png" alt="Mi carrito" style="width:40px; color:black;">Mi carrito
+        </a>
+    </div>
+</div>
+
+
+

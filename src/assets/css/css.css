@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrap{
+    width: 1100px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+}
+.tarjeta-wrap{
+margin: 10px;
+-webkit-perspective: 800;
+perspective: 800;
+}
+.tarjeta{
+    width: 300px;
+    height: 350px;
+    background: #343a40;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: .7s ease;
+    -webkit-box-shadow: 0px 10px 15px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 10px 15px rgba(0,0,0,0.65);
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.65);
+
+}
+.adelante, .atras{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+}
+
+.adelante{
+    width: 100%;
+}
+.atras{
+    transform: rotateY(180deg);
+    padding: 15px;
+    display: flex;
+justify-content: center;
+    align-items: center;
+    
+    text-align: justify;
+    color: #fff;
+    font-family: 'Open Sans';
+}
+.tarjeta-wrap:hover .tarjeta{
+    transform: rotateY(180deg);
+}
+.zoom{
+ transition: transform .5s;
+}
+.zoom:hover{
+    transform: scale(1.5);
+}
+
+    /*Hace la imagen completamente responsiva*/
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
+        color: red;
+    }
+
+    .media-body {
+        color: blue;
+    }
+
+    .mymediabody {
+        color: green;
+    }
+
+    body {
+        background-color: #FBFBFB !important;
+    }
+
+
+    /* contenido  */
+    div.bg-secondary {
+        background-color: #FBFBFB !important;
+    }
+
+    /* carrusel */
+    div.container.bg-light.carru {
+        background-color: #FBFBFB !important;
+    }
+
+    /* contenido centro */
+    div.container {
+        background-color: #FBFBFB !important;
+    }
+
+
+    /* suscribirse */
+    div.container-fluid.text-center {
+        background-color: gray;
+        color: white !important;
+    }
+
+    /* publicidad */
+    div.container-fluid.text-center.border-top.border-light.pt-1 {
+        background-color: gray;
+        color: white !important;
+    }
+
+    /* mas informacion */
+    div.container-fluid.bg-light {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    /* formas de pago  */
+    div.container-fluid.text-center.border.pt-3 {
+        background-color: grey;
+        color: white !important;
+    }
+
+    div.container.bg-light {
+        background-color: #666666 !important;
+    }

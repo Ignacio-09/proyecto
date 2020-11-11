@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center sticky-top">
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/inicio">INICIO</a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                COMPUTADORAS
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="computadoras.html#alien">Alienware</a>
+                <a class="dropdown-item" href="computadoras.html#asus">Asus Gaming</a>
+                <a class="dropdown-item" href="computadoras.html#ss">Spaces Series</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                HARDWARE
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="perifericos.html#mou">Mouses</a>
+                <a class="dropdown-item" href="perifericos.html#aud">Audio</a>
+                <a class="dropdown-item" href="perifericos.html#pan">Pantallas</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                ACCESORIOS
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="accesorios.html#sil">Sillas gamer</a>
+                <a class="dropdown-item" href="accesorios.html#man">Mandos</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="cooler.HTML">WATER COOLING</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="Ecoweb.html">CONTACTOS</a>
+        </li>
+        <li class="nav-item" *ngIf="level=='A'"><a class="nav-link text-danger" routerLink="/usuarios">USUARIOS</a></li>
+        <li class="nav-item" *ngIf="level=='A'"><a class="nav-link text-danger" routerLink="/productos">PRODUCTOS</a></li>
+    </ul>
+
+</nav>

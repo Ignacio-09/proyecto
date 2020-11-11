@@ -1,0 +1,91 @@
+
+<div class="container rounded border mb-3 mt-3 shadow bg-white">
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-sm-1">
+            <div class="form-group text-right pt-2">
+                <label for="usr"> Nombre:</label>
+
+            </div>
+
+            <div class="form-group text-right pt-2">
+                <label for="usr">Apellidos:</label>
+
+            </div>
+            <div class="form-group text-right pt-2">
+                <label for="usr">Email:</label>
+            </div>
+
+            <div class="form-group text-right pt-2">
+                <label for="usr">Usuario:</label>
+            </div>
+
+            <div class="form-group text-right">
+                <label for="usr">Contraseña:</label>
+
+            </div>
+
+        </div>
+        <!-- Columna de 10 con  el formulario -->
+        <div class="col-sm-6">
+
+            <form id="formulario" >
+                <div class="form-group">
+                    <input type="text" class="form-control border border-dark" id="usr" placeholder="Nombre" name="nombreusuario" required="Este campo es obligatorio"
+                    [(ngModel)]="nuevoUser.nombre">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control border border-dark" id="usr" placeholder="Apellidos" name="apellidousuario" required="Este campo es obligatorio"
+                    [(ngModel)]="nuevoUser.apellidos">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control border border-dark" id="usr"  placeholder="Correo electronico" name="emailusuario"required="Este campo es obligatorio"
+                    [(ngModel)]="nuevoUser.correo">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="usr"  placeholder="Nombre de Usuario" name="user" required="Este campo es obligatorio"
+                    [(ngModel)]="nuevoUser.user">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-key"></i></div>
+                    </div>
+                    <input type="password" class="form-control" id="usr" placeholder="Contraseña"
+                        name="passwordusuario" required="Este campo es obligatorio"
+                    [(ngModel)]="nuevoUser.pass">
+                </div>
+                <div class="form-group">
+                    <p for="usr">Fecha de nacimiento:</p>
+
+
+                    <input type="date" name="fecha" id="fecha"
+                    [(ngModel)]="nuevoUser.fecha">
+                </div>
+
+                <div class="form-check">
+                    <label class="form-check-label" for="radio1">
+                        <input type="checkbox" class="form-check-input" id="radio1" name="optradio"
+                            value="option1" checked>Recibir actualizaciones y ofertas
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="radio2">
+                        <input type="checkbox" class="form-check-input" id="radio2" name="optradio"
+                            value="option2" checked>Acepta terminos y condiciones
+                    </label>
+                </div>
+                <br>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" (click)="agregarUsuario()"><i class="fas fa-user-plus mr-1"></i>Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div><br><br>
+</div>
+
+
+

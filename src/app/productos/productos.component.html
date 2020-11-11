@@ -1,0 +1,188 @@
+<app-menu></app-menu>
+<div class="container mt-3" >
+    <div class="row">
+        <div class="col">
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-primary" id="entrar" data-toggle='modal' data-target='#nuevoProducto'>Nuevo producto</button>
+            </div>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripcion</th>
+                        <th>Categoria</th>
+                        <th>URL</th>
+                        <th>Vista previa</th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productos">
+                        <td>{{producto.id_prod}}</td>
+                        <td>{{producto.nombre_prod}}</td>
+                        <td>{{producto.precio_prod}}</td>
+                        <td>{{producto.desc_prod}}</td>
+                        <td>{{producto.categoria}}</td>
+                        <td>{{producto.url_prod}}</td>
+                        <td><img src="{{producto.url_prod}}" alt="" width="80px"></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mb-3" *ngIf="level=='A'"
+                            (click)="temporalProducto(producto)" data-toggle='modal' data-target='#editarProducto'><i class="fas fa-pen"></i></button>
+                        &nbsp;
+                            <button class="btn btn-danger btn-sm" *ngIf="level=='A'"
+                            (click)="temporalProducto(producto)" data-toggle='modal' data-target='#eliminarProducto'><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Nuevo Producto -->
+<div class="modal fade" id="nuevoProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Nuevo Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nombre:</div>
+                    </div>
+                    <input type="text" class="form-control" id="nombreNuevoProd" placeholder="Nombre dl producto"
+                        [(ngModel)]="nuevoProducto.nombre_prod">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Precio $:</div>
+                    </div>
+                    <input type="text" class="form-control" id="precioNuevoProd" placeholder="Precio del producto"
+                        [(ngModel)]="nuevoProducto.precio_prod">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Categoria:</div>
+                    </div>
+                    <input type="text" class="form-control" id="categoriaNuevoProd" placeholder="Categoria del producto"
+                        [(ngModel)]="nuevoProducto.categoria">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Descripcion:</div>
+                    </div>
+                    <textarea type="text" class="form-control" id="precioNuevoProd" placeholder="Descripcion del producto" [(ngModel)]="nuevoProducto.desc_prod"></textarea>
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">URL imagen:</div>
+                    </div>
+                    <input type="url" class="form-control" id="precioNuevoProd" placeholder="URL del producto"
+                        [(ngModel)]="nuevoProducto.url_prod">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="agregarProducto()">Agregar Producto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Editar productp -->
+<div class="modal fade" id="editarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Editar Producto</h5>
+                <div class="input-group mb-3 row">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Id:</div>
+                    </div>
+                    <input type="text" class="form-control col-xs-2" size="5" id="nombreeditarProd"
+                        [(ngModel)]="tmpProducto.id_prod" disabled>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nombre:</div>
+                    </div>
+                    <input type="text" class="form-control" id="nombreeditarProd" placeholder="Nombre del producto"
+                        [(ngModel)]="tmpProducto.nombre_prod">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Precio $:</div>
+                    </div>
+                    <input type="text" class="form-control" id="precioeditarProd" placeholder="Precio del producto"
+                        [(ngModel)]="tmpProducto.precio_prod">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Categoria:</div>
+                    </div>
+                    <input type="text" class="form-control" id="categoriaeditarProd" placeholder="Categoria del producto"
+                        [(ngModel)]="tmpProducto.categoria">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Descripcion:</div>
+                    </div>
+                    <textarea type="text" class="form-control" id="precioeditarProd" placeholder="Descripcion del producto" [(ngModel)]="tmpProducto.desc_prod"></textarea>
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">URL imagen:</div>
+                    </div>
+                    <input type="url" class="form-control" id="precioeditarProd" placeholder="URL del producto"
+                        [(ngModel)]="tmpProducto.url_prod">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="guardarCambios()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Eliminar -->
+<div class="modal fade" id="eliminarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro que quiere eliminar el producto {{tmpProducto.nombre_prod}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="confirmarEliminar()">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
