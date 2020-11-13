@@ -1,0 +1,113 @@
+<div class="container rounded border mb-3 mt-3 shadow bg-white">
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-sm-3">
+
+            <div class="container text-black" >
+                <br>
+                <div >
+                    <img style="background-color: #343a40;" src="../../assets/img/perfil.jpg" class="rounded-circle mx-auto d-block m1-3 mt-3" alt="Ignacio Luz" width="180" >
+                </div>
+
+                
+
+                <div class="text-center text-dark">
+                    <h5 >Usuario:</h5>
+                </div>
+                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                    </div>
+                    <input  disabled type="text" class="form-control" id="usr"  placeholder="Nombre de Usuario" name="user" required="Este campo es obligatorio"
+                    [(ngModel)]="usuario[0].user">
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="col-sm-1">
+            <div class="form-group text-right pt-2">
+                
+                <label for="usr"> Nombre:</label>
+
+            </div>
+
+            <div class="form-group text-right pt-2">
+                <label for="usr">Apellidos:</label>
+
+            </div>
+            <div class="form-group text-right pt-2 mt-4">
+                <label for="usr">Email:</label>
+            </div>
+
+            
+
+            <div class="form-group text-right pt-2 mt-4">
+                <label for="usr">Contraseña:</label>
+
+            </div>
+
+        </div>
+        <!-- Columna de 10 con  el formulario -->
+        <div class="col-sm-6">
+
+            <form #formCuenta="ngForm"  >
+                <div class="form-row mb-4 ml-1">
+                    <input type="text" class="form-control border border-dark col-sm-8" placeholder="Nombre" name="nombreusuario" required
+                     [(ngModel)]="usuario[0].nombre" #nombreusuario = "ngModel" [disabled] = '!editar'>
+                     <span *ngIf="nombreusuario.touched && !nombreusuario.valid; then requerido"></span>
+                    </div>
+                <div class="form-row  mb-4 ml-1">
+                    <input type="text" class="form-control border border-dark col-sm-8" placeholder="Apellidos" name="apellidousuario" required
+                    [(ngModel)]="usuario[0].apellidos" #apellidousuario = "ngModel" [disabled] = '!editar'>
+                    <span *ngIf="apellidousuario.touched && !apellidousuario.valid; then requerido"></span>
+                </div>
+                <div class="form-row  mb-4 ml-1">
+                    <input type="email" class="form-control border border-dark col-sm-8"  placeholder="Correo electronico" name="emailusuario" required
+                    [(ngModel)]="usuario[0].correo" #emailusuario = "ngModel" [disabled] = '!editar'>
+                    <span *ngIf="emailusuario.touched && !emailusuario.valid; then requerido"></span>
+                </div>
+                <div class="input-group  mb-3 ml-1">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-key"></i></div>
+                    </div>
+                    <input type="password" class="form-control col-sm-6" placeholder="Contraseña" name="passusuario" required
+                    [(ngModel)]="usuario[0].pass"  #passusuario = "ngModel" [disabled] = '!editar'>
+                    <span *ngIf="passusuario.touched && !passusuario.valid; then requerido"></span>
+                </div>
+                <div class="form-group">
+                    <p for="usr">Fecha de nacimiento:</p>
+                    <input type="date" name="fecha" id="fecha" placeholder="04-12-2020" required
+                    [(ngModel)]="usuario[0].fecha_nac"  #fecha = "ngModel" [disabled] = '!editar'>
+                    <span *ngIf="fecha.touched && !fecha.valid; then requerido"></span>
+                </div>
+                <br>
+                <div class="text-right" *ngIf="editar; then siEditar else noEditar">
+                    <!--Aqui van los ng-templates para editar-->
+                </div>
+                
+            </form>
+                    
+        </div>
+    </div><br><br>
+</div>
+
+
+<ng-template #requerido>
+    <span class="col-sm-1" [style.color]="'red'">*</span>
+</ng-template>
+
+<ng-template #siEditar>
+    <button type="button" class="btn btn-danger mr-1" (click)="cancelar()"><i class="fa fa-window-close mr-1" aria-hidden="true" ></i>Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="guardarCambios()" [disabled]="!formCuenta.form.valid" ><i class="fa fa fa-check-circle mr-1"></i>Guardar cambios</button>
+</ng-template>
+
+<ng-template #noEditar>
+    <button type="button" class="btn btn-danger mr-1" (click)="eliminarUsuario()"><i class="fa fa-trash mr-1"></i>Eliminar cuenta</button>
+    <button type="button" class="btn btn-info mr-1" (click)="editarUsuario()"><i class="fas fa-pen-square mr-1" aria-hidden="true" ></i>Editar Cuenta</button>
+    <button type="button" class="btn btn-success" (click)="regresar()"><i class="fa fa-chevron-circle-left mr-1"></i>Regresar</button>
+</ng-template>
+
+<div></div>

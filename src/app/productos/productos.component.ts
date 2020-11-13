@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../datos.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-productos',
@@ -11,9 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductosComponent implements OnInit {
 
   productos:any;
-  
+  buscar = '';
   level:string;
   user:string;
+  
   nuevoProducto = {id_prod:'',nombre_prod:'', precio_prod:'', desc_prod:'', categoria:'', url_prod:''};
   tmpProducto = {id_prod:'',nombre_prod:'',  precio_prod:'', desc_prod:'', categoria:'', url_prod:''};
   constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
@@ -21,6 +23,7 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
     this.level = this.datos.getCuenta().level;
     this.user = this.datos.getCuenta().user;
+    this.buscar = "";
     this.llenarProductos();
   }
 
@@ -96,6 +99,18 @@ export class ProductosComponent implements OnInit {
     });
   }
 
+  buscarProductos(){
+    if(this.buscar != ''){
+      this.datos.buscarProducto(this.buscar).subscribe(resp => {
+          this.productos = resp;
+          console.log(resp);
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.llenarProductos();
+    }
+  }
 
 
 }

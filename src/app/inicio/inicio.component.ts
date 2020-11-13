@@ -11,10 +11,12 @@ export class InicioComponent implements OnInit {
   level:string;
   user:string;
   productos:any;
+  carta: boolean;
   contador: number = 0;
   constructor(private datos:DatosService, private router:Router) { }
 
   ngOnInit(): void {
+    this.carta = true;
     this.level = this.datos.getCuenta().level;
     this.user = this.datos.getCuenta().user;
     this.llenarTemas();

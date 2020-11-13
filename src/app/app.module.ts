@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ProductosComponent } from './productos/productos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { MicuentaComponent } from './micuenta/micuenta.component';
 
 const rutas: Route[] = [
   {path:'', component: InicioComponent},
@@ -25,7 +26,8 @@ const rutas: Route[] = [
   {path:'registro', component: RegistroComponent},
   {path:'productos', component: ProductosComponent},
   {path:'usuarios', component: UsuariosComponent},
-  {path:'*', component: InicioComponent}
+  {path:'micuenta', component: MicuentaComponent},
+  {path:'**', component: InicioComponent}
 ]
 
 @NgModule({
@@ -38,7 +40,8 @@ const rutas: Route[] = [
     LoginComponent,
     RegistroComponent,
     ProductosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    MicuentaComponent
   ],
   imports: [
     BrowserModule,

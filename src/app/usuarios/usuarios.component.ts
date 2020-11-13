@@ -64,6 +64,10 @@ export class UsuariosComponent implements OnInit {
   guardarCambios(){
     this.datos.putUsuario(this.tmpUser).subscribe(resp => {
       if(resp['result']=='ok'){
+        let i = this.usuarios.indexOf( this.usuarios.find( usuario => usuario.user == this.tmpUser.user ));
+        this.usuarios[i].pass = this.tmpUser.pass;
+        this.usuarios[i].tipo = this.tmpUser.tipo_user;
+        this.usuarios[i].nombre = this.tmpUser.nombre;
         this.llenarUsuarios();
         this.msg.success("El Usuario se guardo correctamente.");
       }else{
@@ -77,6 +81,8 @@ export class UsuariosComponent implements OnInit {
   confirmarEliminar(){
     this.datos.deleteUsuario(this.tmpUser).subscribe(resp => {
       if(resp['result']=='ok'){
+        let i = this.usuarios.indexOf( this.usuarios.find( usuario => usuario.user == this.tmpUser.user ));
+        this.usuarios.splice(i,1);
         this.llenarUsuarios();
         this.msg.success("El usuario se elimino correctamente.");
       }else{

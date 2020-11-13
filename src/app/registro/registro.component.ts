@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DatosService } from '../datos.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,28 +8,53 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements OnInit, OnDestroy {
   level:string;
   user:string;
   pass:string;
-  nuevoUser = {user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""};
+  nuevoUser:any = {user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""};
   usuarios:any = [{user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""}];
-  tmpUser = {user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""};
-
+  tmpUser:any = {user:"", pass:"", tipo:"U", nombre:""};
+  usuario: string;
 
   constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
 
   ngOnInit(): void {
-    this.msg.success("Hola");
+    this.level = '';
+    this.msg.success("Bienvenido");
+    
+  }
+  
+  comprobarUsuarios(){
+    this.datos.compUsuario(this.nuevoUser.user).subscribe(resp => {
+      this.tmpUser = resp;
+      console.log(resp);
+      this.usuario = this.tmpUser.user;
+    }, error => {
+      console.log(error);
+    })
   }
 
+
   agregarUsuario(){
+
+    this.comprobarUsuarios();
+    console.log(this.tmpUser);
+    console.log(this.usuario);
     if(this.nuevoUser.user == '' ||this.nuevoUser.pass == '' ||
       this.nuevoUser.tipo == '' || this.nuevoUser.nombre == ''  ||
       this.nuevoUser.apellidos == '' || this.nuevoUser.correo == ''  ||
       this.nuevoUser.fecha == '' ){
       this.msg.error("Completa todos los campos");
       console.log("Completa");
+      return;
+    }
+    
+    if(this.nuevoUser.user == this.tmpUser.user) {
+      console.log(this.nuevoUser.user);
+      console.log(this.tmpUser.nombre);
+      console.log(this.tmpUser.pass);
+      this.msg.error("Usuario ya existente");
       return;
     }
     this.datos.postUsuario(this.nuevoUser).subscribe(resp => {
@@ -71,5 +96,10 @@ export class RegistroComponent implements OnInit {
     console.log(error);
   })
 }
+
+ngOnDestroy(): void {
+  window.location.reload();
+}
+
 
 }

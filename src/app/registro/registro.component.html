@@ -2,26 +2,28 @@
 <div class="container rounded border mb-3 mt-3 shadow bg-white">
     <br>
     <br>
+    <div class="text-center mb-4"><h2>Registrarse</h2></div>
     <div class="row justify-content-center">
-        <div class="col-sm-1">
-            <div class="form-group text-right pt-2">
+        
+        <div class="col-sm-3">
+            <div class="form-group text-right pt-2 mt-1">
                 <label for="usr"> Nombre:</label>
 
             </div>
 
-            <div class="form-group text-right pt-2">
+            <div class="form-group text-right pt-2 mt-1">
                 <label for="usr">Apellidos:</label>
 
             </div>
-            <div class="form-group text-right pt-2">
+            <div class="form-group text-right pt-2 mt-2">
                 <label for="usr">Email:</label>
             </div>
 
-            <div class="form-group text-right pt-2">
+            <div class="form-group text-right pt-2 mt-4">
                 <label for="usr">Usuario:</label>
             </div>
 
-            <div class="form-group text-right">
+            <div class="form-group text-right pt-2 mt-4">
                 <label for="usr">Contraseña:</label>
 
             </div>
@@ -30,40 +32,43 @@
         <!-- Columna de 10 con  el formulario -->
         <div class="col-sm-6">
 
-            <form id="formulario" >
-                <div class="form-group">
-                    <input type="text" class="form-control border border-dark" id="usr" placeholder="Nombre" name="nombreusuario" required="Este campo es obligatorio"
-                    [(ngModel)]="nuevoUser.nombre">
+            <form #formRegistro="ngForm"  >
+                <div class="form-row mb-4 ml-1">
+                    <input type="text" class="form-control border border-dark col-sm-8" placeholder="Nombre" name="nombreusuario" required
+                     [(ngModel)]="nuevoUser.nombre" #nombreusuario = "ngModel">
+                     <span *ngIf="nombreusuario.touched && !nombreusuario.valid; then requerido"></span>
+                    </div>
+                <div class="form-row  mb-4 ml-1">
+                    <input type="text" class="form-control border border-dark col-sm-8" placeholder="Apellidos" name="apellidousuario" required
+                    [(ngModel)]="nuevoUser.apellidos" #apellidousuario = "ngModel">
+                    <span *ngIf="apellidousuario.touched && !apellidousuario.valid; then requerido"></span>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control border border-dark" id="usr" placeholder="Apellidos" name="apellidousuario" required="Este campo es obligatorio"
-                    [(ngModel)]="nuevoUser.apellidos">
+                <div class="form-row  mb-4 ml-1">
+                    <input type="email" class="form-control border border-dark col-sm-8"  placeholder="Correo electronico" name="emailusuario" required
+                    [(ngModel)]="nuevoUser.correo" #emailusuario = "ngModel">
+                    <span *ngIf="emailusuario.touched && !emailusuario.valid; then requerido"></span>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control border border-dark" id="usr"  placeholder="Correo electronico" name="emailusuario"required="Este campo es obligatorio"
-                    [(ngModel)]="nuevoUser.correo">
-                </div>
-                <div class="input-group mb-3">
+                <div class="input-group  mb-4 ml-1">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-user"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="usr"  placeholder="Nombre de Usuario" name="user" required="Este campo es obligatorio"
-                    [(ngModel)]="nuevoUser.user">
+                    <input type="text" class="form-control col-sm-6"  placeholder="Nombre de Usuario" name="'user'" required
+                    [(ngModel)]="nuevoUser.user" #user = "ngModel">
+                    <span *ngIf="user.touched && !user.valid; then requerido"></span>
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group  mb-3 ml-1">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-key"></i></div>
                     </div>
-                    <input type="password" class="form-control" id="usr" placeholder="Contraseña"
-                        name="passwordusuario" required="Este campo es obligatorio"
-                    [(ngModel)]="nuevoUser.pass">
+                    <input type="password" class="form-control col-sm-6" placeholder="Contraseña" name="passusuario" required
+                    [(ngModel)]="nuevoUser.pass"  #passusuario = "ngModel">
+                    <span *ngIf="passusuario.touched && !passusuario.valid; then requerido"></span>
                 </div>
                 <div class="form-group">
                     <p for="usr">Fecha de nacimiento:</p>
-
-
-                    <input type="date" name="fecha" id="fecha"
-                    [(ngModel)]="nuevoUser.fecha">
+                    <input type="date" name="fecha" id="fecha" placeholder="04-12-2020" required
+                    [(ngModel)]="nuevoUser.fecha"  #fecha = "ngModel">
+                    <span *ngIf="fecha.touched && !fecha.valid; then requerido"></span>
                 </div>
 
                 <div class="form-check">
@@ -80,12 +85,16 @@
                 </div>
                 <br>
                 <div class="text-right">
-                    <button type="button" class="btn btn-primary" (click)="agregarUsuario()"><i class="fas fa-user-plus mr-1"></i>Registrarse</button>
+                    <button type="button" class="btn btn-primary" (click)="agregarUsuario()" [disabled]="!formRegistro.form.valid"><i class="fas fa-user-plus mr-1"></i>Registrarse</button>
                 </div>
+                
             </form>
-        </div>
+        </div> 
     </div><br><br>
 </div>
 
+<ng-template #requerido>
+    <span class="col-sm-1" [style.color]="'red'">*</span>
+</ng-template>
 
 

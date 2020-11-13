@@ -10,9 +10,9 @@
     justify-content: center;
 }
 .tarjeta-wrap{
-margin: 10px;
--webkit-perspective: 800;
-perspective: 800;
+    margin: 10px;
+    -webkit-perspective: 800;
+    perspective: 800;
 }
 .tarjeta{
     width: 300px;
@@ -126,4 +126,15 @@ justify-content: center;
 
     div.container.bg-light {
         background-color: #666666 !important;
+    }
+
+
+    .activado{
+        border: 3px solid #64acf365;
+        text-shadow: #fff;
+        color: #fff;
+        background-color: #264d748f;
+        text-decoration-color: aqua;
+        border-radius: 15%;
+        
     }

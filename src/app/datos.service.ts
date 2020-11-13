@@ -78,7 +78,14 @@ export class DatosService {
     return this.http.delete(URL + "productos.php", {headers: Headers, params: Params});
   }
 
-
+  buscarProducto(buscar){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('nombre_prod', buscar);  
+    console.log(Params);
+    return this.http.get(URL + "productos.php", {headers:Headers, params:Params});
+  }
 
   postUsuario(usuario){
 
@@ -112,6 +119,22 @@ export class DatosService {
     console.log(Headers);
     return this.http.get(URL + "usuarios.php", {headers:Headers});
   }
+
+  getUsuario(user){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('user', user);  
+    console.log(Params);
+    return this.http.get(URL + "usuarios.php", {headers:Headers, params:Params});
+  }
+
+  compUsuario(user){
+    let Params = new HttpParams();
+    Params = Params.append('user', user);  
+    return this.http.get(URL + "registros.php", {params:Params});
+  }
+
 
   putUsuario(usuario){
     let Headers = new HttpHeaders();
