@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   user = "";
   password = "";
   auth = false;
-  h = "<h1>hola</h1>"
+
   entrar(){
     this.datos.login(this.user, this.password).subscribe(resp => {
       if(resp['auth']=='si'){
@@ -35,10 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.user = this.datos.getCuenta().user;
-    if(this.user != '') {
-      this.msg.error("Primero debes cerrar sesion");
-      this.router.navigate(['']);
-    }
+    if (this.datos.getCuenta().user != '') {
+      this.router.navigate(['/inicio']);
+    }  
   }
 
   reloadPage(){
@@ -46,7 +45,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    window.location.reload();
+    if (this.datos.getCuenta().user != '') {
+      this.reloadPage();
+    }
   }
 
 }

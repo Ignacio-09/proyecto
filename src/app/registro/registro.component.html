@@ -53,8 +53,9 @@
                         <div class="input-group-text"><i class="fas fa-user"></i></div>
                     </div>
                     <input type="text" class="form-control col-sm-6"  placeholder="Nombre de Usuario" name="'user'" required
-                    [(ngModel)]="nuevoUser.user" #user = "ngModel">
-                    <span *ngIf="user.touched && !user.valid; then requerido"></span>
+                    [(ngModel)]="nuevoUser.user" #user = "ngModel" (keyup)="comprobarUsuarios()">
+                    <span *ngIf="user.touched && !user.valid; then requerido"  ></span>
+                    <span *ngIf="existe" [style.color]="'red'" class="ml-3"><i title = "Elige otro nombre de usuario"class="fa fa-info-circle" aria-hidden="true"></i></span>
                 </div>
                 <div class="input-group  mb-3 ml-1">
                     <div class="input-group-prepend">
@@ -85,7 +86,7 @@
                 </div>
                 <br>
                 <div class="text-right">
-                    <button type="button" class="btn btn-primary" (click)="agregarUsuario()" [disabled]="!formRegistro.form.valid"><i class="fas fa-user-plus mr-1"></i>Registrarse</button>
+                    <button type="button" class="btn btn-primary" (click)="agregarUsuario()"[disabled]="!formRegistro.form.valid"><i class="fas fa-user-plus mr-1"></i>Registrarse</button>
                 </div>
                 
             </form>
@@ -94,7 +95,39 @@
 </div>
 
 <ng-template #requerido>
-    <span class="col-sm-1" [style.color]="'red'">*</span>
+    <span class="col-sm-1" [style.color]="'red'"><i title="Campo requerido" class="fa fa-info-circle" aria-hidden="true"></i></span>
 </ng-template>
 
 
+<Style>
+
+    
+[title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+[title]:after {
+    content: attr(title);
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    font-family: Raleway;
+    position: absolute;
+    padding: 3px 20px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border: 1px solid #111111;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 6px;
+    
+}
+[title] {
+    position: relative;
+}
+</Style>

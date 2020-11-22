@@ -57,17 +57,17 @@
                 <div class="form-row mb-4 ml-1">
                     <input type="text" class="form-control border border-dark col-sm-8" placeholder="Nombre" name="nombreusuario" required
                      [(ngModel)]="usuario[0].nombre" #nombreusuario = "ngModel" [disabled] = '!editar'>
-                     <span *ngIf="nombreusuario.touched && !nombreusuario.valid; then requerido"></span>
+                     <span *ngIf="nombreusuario.touched && !nombreusuario.valid && editar; then requerido"></span>
                     </div>
                 <div class="form-row  mb-4 ml-1">
                     <input type="text" class="form-control border border-dark col-sm-8" placeholder="Apellidos" name="apellidousuario" required
                     [(ngModel)]="usuario[0].apellidos" #apellidousuario = "ngModel" [disabled] = '!editar'>
-                    <span *ngIf="apellidousuario.touched && !apellidousuario.valid; then requerido"></span>
+                    <span *ngIf="apellidousuario.touched && !apellidousuario.valid && editar; then requerido"></span>
                 </div>
                 <div class="form-row  mb-4 ml-1">
                     <input type="email" class="form-control border border-dark col-sm-8"  placeholder="Correo electronico" name="emailusuario" required
                     [(ngModel)]="usuario[0].correo" #emailusuario = "ngModel" [disabled] = '!editar'>
-                    <span *ngIf="emailusuario.touched && !emailusuario.valid; then requerido"></span>
+                    <span *ngIf="emailusuario.touched && !emailusuario.valid && editar; then requerido"></span>
                 </div>
                 <div class="input-group  mb-3 ml-1">
                     <div class="input-group-prepend">
@@ -75,13 +75,13 @@
                     </div>
                     <input type="password" class="form-control col-sm-6" placeholder="Contraseña" name="passusuario" required
                     [(ngModel)]="usuario[0].pass"  #passusuario = "ngModel" [disabled] = '!editar'>
-                    <span *ngIf="passusuario.touched && !passusuario.valid; then requerido"></span>
+                    <span *ngIf="passusuario.touched && !passusuario.valid && editar; then requerido"></span>
                 </div>
                 <div class="form-group">
                     <p for="usr">Fecha de nacimiento:</p>
-                    <input type="date" name="fecha" id="fecha" placeholder="04-12-2020" required
+                    <input type="date" name="fecha" value="2020-12-04" id="fecha" placeholder="1999-12-04" required
                     [(ngModel)]="usuario[0].fecha_nac"  #fecha = "ngModel" [disabled] = '!editar'>
-                    <span *ngIf="fecha.touched && !fecha.valid; then requerido"></span>
+                    <span *ngIf="fecha.touched && !fecha.valid && editar; then requerido"></span>
                 </div>
                 <br>
                 <div class="text-right" *ngIf="editar; then siEditar else noEditar">
@@ -96,18 +96,62 @@
 
 
 <ng-template #requerido>
-    <span class="col-sm-1" [style.color]="'red'">*</span>
+    <span class="col-sm-1" [style.color]="'red'"><i title="Campo requerido" class="fa fa-info-circle" aria-hidden="true"></i></span>
 </ng-template>
 
 <ng-template #siEditar>
     <button type="button" class="btn btn-danger mr-1" (click)="cancelar()"><i class="fa fa-window-close mr-1" aria-hidden="true" ></i>Cancelar</button>
-    <button type="button" class="btn btn-success" (click)="guardarCambios()" [disabled]="!formCuenta.form.valid" ><i class="fa fa fa-check-circle mr-1"></i>Guardar cambios</button>
+    <button type="button" class="btn btn-success" data-toggle='modal' data-target='#editarCuenta' [disabled]="!formCuenta.form.valid" ><i class="fa fa fa-check-circle mr-1"></i>Guardar cambios</button>
 </ng-template>
 
 <ng-template #noEditar>
-    <button type="button" class="btn btn-danger mr-1" (click)="eliminarUsuario()"><i class="fa fa-trash mr-1"></i>Eliminar cuenta</button>
+    <button type="button" class="btn btn-danger mr-1" (click)="temporalCuenta()"  data-toggle='modal' data-target='#eliminarCuenta'><i class="fa fa-trash mr-1"></i>Eliminar cuenta</button>
     <button type="button" class="btn btn-info mr-1" (click)="editarUsuario()"><i class="fas fa-pen-square mr-1" aria-hidden="true" ></i>Editar Cuenta</button>
     <button type="button" class="btn btn-success" (click)="regresar()"><i class="fa fa-chevron-circle-left mr-1"></i>Regresar</button>
 </ng-template>
 
-<div></div>
+<!-- Modal Para Eliminar Cuenta-->
+<div class="modal fade" id="eliminarCuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro que quiere eliminar la cuenta de: {{userTemp.user}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="confirmarEliminar()">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Editar Cuenta-->
+<div class="modal fade" id="editarCuenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Guardar cambios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de guardar los cambios?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="guardarCambios()">Si</button>
+            </div>
+        </div>
+    </div>
+</div>

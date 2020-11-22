@@ -19,15 +19,15 @@ export class HeaderComponent implements OnInit {
     this.level = this.datos.getCuenta().level;
       if (this.datos.getCuenta().user != '') {
         this.cuenta = this.datos.getCuenta().user;
-      }     
+      } else {
+        this.router.navigate(['/inicio']);
+      }
   }
 
   salir(){
-    window.location.reload();
     this.datos.setCuenta('','','');
-    this.router.navigate(['']);
     this.cuenta = "Mi cuenta"
-
+    window.location.reload();
   }
 
 }

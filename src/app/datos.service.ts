@@ -129,6 +129,15 @@ export class DatosService {
     return this.http.get(URL + "usuarios.php", {headers:Headers, params:Params});
   }
 
+  buscarUsuario(buscar){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('buscar', buscar);  
+    console.log(Params);
+    return this.http.get(URL + "usuarios.php", {headers:Headers, params:Params});
+  }
+
   compUsuario(user){
     let Params = new HttpParams();
     Params = Params.append('user', user);  
@@ -145,6 +154,20 @@ export class DatosService {
     Params = Params.append('pass', usuario.pass);
     Params = Params.append('tipo_user', usuario.tipo_user);
     Params = Params.append('nombre', usuario.nombre);
+
+    return this.http.put(URL + "usuarios.php", null, {headers: Headers, params: Params});
+  }
+
+  putCuenta(usuario){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('user', usuario.user);
+    Params = Params.append('pass', usuario.pass);
+    Params = Params.append('nombre', usuario.nombre);
+    Params = Params.append('apellidos', usuario.apellidos);
+    Params = Params.append('fecha_nac', usuario.fecha_nac);
+    Params = Params.append('correo', usuario.correo);
 
     return this.http.put(URL + "usuarios.php", null, {headers: Headers, params: Params});
   }

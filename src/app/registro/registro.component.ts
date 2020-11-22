@@ -12,9 +12,10 @@ export class RegistroComponent implements OnInit, OnDestroy {
   level:string;
   user:string;
   pass:string;
+
+  existe: boolean = false;
   nuevoUser:any = {user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""};
-  usuarios:any = [{user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""}];
-  tmpUser:any = {user:"", pass:"", tipo:"U", nombre:""};
+  tmpUser:any = {user:""};
   usuario: string;
 
   constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
@@ -28,8 +29,13 @@ export class RegistroComponent implements OnInit, OnDestroy {
   comprobarUsuarios(){
     this.datos.compUsuario(this.nuevoUser.user).subscribe(resp => {
       this.tmpUser = resp;
-      console.log(resp);
       this.usuario = this.tmpUser.user;
+
+      if (this.usuario == this.nuevoUser.user) {
+        this.existe = true;
+      } else {
+        this.existe = false;
+      }
     }, error => {
       console.log(error);
     })
@@ -37,31 +43,22 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
 
   agregarUsuario(){
-
-    this.comprobarUsuarios();
-    console.log(this.tmpUser);
-    console.log(this.usuario);
     if(this.nuevoUser.user == '' ||this.nuevoUser.pass == '' ||
       this.nuevoUser.tipo == '' || this.nuevoUser.nombre == ''  ||
       this.nuevoUser.apellidos == '' || this.nuevoUser.correo == ''  ||
       this.nuevoUser.fecha == '' ){
       this.msg.error("Completa todos los campos");
-      console.log("Completa");
       return;
     }
     
     if(this.nuevoUser.user == this.tmpUser.user) {
-      console.log(this.nuevoUser.user);
-      console.log(this.tmpUser.nombre);
-      console.log(this.tmpUser.pass);
       this.msg.error("Usuario ya existente");
       return;
     }
+
     this.datos.postUsuario(this.nuevoUser).subscribe(resp => {
       if(resp['result']=='ok'){
-        let usuario = JSON.parse(JSON.stringify(this.nuevoUser))
         this.logueo();
-        this.usuarios.push(usuario);
         this.nuevoUser.user = '';
         this.nuevoUser.pass = '';
         this.nuevoUser.tipo = '';
@@ -70,7 +67,6 @@ export class RegistroComponent implements OnInit, OnDestroy {
         this.nuevoUser.correo = '';
         this.nuevoUser.fecha = '';
         this.msg.success("El usuario se guardo correctamente.");
-        
         console.log("Exito");
       }else{
         this.msg.error("El usuario no se ha podido guardar.");
@@ -98,7 +94,9 @@ export class RegistroComponent implements OnInit, OnDestroy {
 }
 
 ngOnDestroy(): void {
-  window.location.reload();
+  if (this.datos.getCuenta().user != '') {
+    window.location.reload();
+  }
 }
 
 

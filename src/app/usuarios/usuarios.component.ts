@@ -12,6 +12,7 @@ export class UsuariosComponent implements OnInit {
 
   level:string;
   user:string;
+  buscar: string;
   nuevoUser = {user:"", pass:"", tipo_user:"A", nombre:""};
   usuarios:any = [{user:"", pass:"", tipo_user:"", nombre:""}];
   tmpUser = {user:"", pass:"", tipo_user:"", nombre:""};
@@ -21,7 +22,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.level = this.datos.getCuenta().level;
     this.llenarUsuarios();
-
+    
   }
 
   llenarUsuarios(){
@@ -35,18 +36,23 @@ export class UsuariosComponent implements OnInit {
 
   agregarUsuario(){
     if(this.nuevoUser.user == '' ||this.nuevoUser.pass == '' ||
-      this.nuevoUser.tipo_user == '' ||this.nuevoUser.nombre == ''){
+      this.nuevoUser.nombre == ''){
       this.msg.error("Completa todos los campos");
       return;
     }
-    this.datos.postUser(this.nuevoUser).subscribe(resp => {
+    
+    if (this.usuarios.indexOf(this.usuarios.find( usuario => usuario.user == this.nuevoUser.user)) >= 0) {
+      this.msg.error("Elige otro nombre de usuario");
+      return;
+    }
+        
+      this.datos.postUser(this.nuevoUser).subscribe(resp => {
       if(resp['result']=='ok'){
         let usuario = JSON.parse(JSON.stringify(this.nuevoUser))
         this.usuarios.push(usuario);
         this.nuevoUser.user = '';
         this.nuevoUser.pass = '';
         this.nuevoUser.nombre = '';
-        this.nuevoUser.tipo_user = '';
         this.msg.success("El usuario se guardo correctamente.");
       }else{
         this.msg.error("El usuario no se ha podido guardar.");
@@ -56,9 +62,9 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  temporalUsuario(msj){
-    console.log(msj);
-    this.tmpUser = JSON.parse(JSON.stringify(msj));
+  temporalUsuario(user){
+    console.log(user);
+    this.tmpUser = JSON.parse(JSON.stringify(user));
   }
 
   guardarCambios(){
@@ -91,6 +97,20 @@ export class UsuariosComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  buscarUsuarios(){
+    if(this.buscar != ''){
+      
+      this.datos.buscarUsuario(this.buscar).subscribe(resp => {
+          this.usuarios = resp;
+          console.log(resp);
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.llenarUsuarios();
+    }
   }
 
 }

@@ -4,9 +4,9 @@
         <div class="col-sm-8" ></div>
         <div class="col-sm-4">
             <form class="form-inline mt-3">
-                <input class="form-control" ng-disabled = "level == 'A'" type="text" name="buscar" placeholder="Buscar" (keyup)="buscarProductos()" [(ngModel)]="buscar">
+                <input class="form-control" type="text" name="buscar" placeholder="Buscar" (keyup)="buscarProductos()" [(ngModel)]="buscar">
                 
-                <button class="btn btn-info ml-1" ng-disabled = "level == 'A'" (click)="buscarProductos()"><i class="fa fa-search mr-1"></i>Buscar</button>
+                <button class="btn btn-info ml-1" (click)="buscarProductos()"><i class="fa fa-search mr-1"></i>Buscar</button>
             </form>
         </div>
     </div>
@@ -70,7 +70,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Nombre:</div>
                     </div>
-                    <input type="text" class="form-control" id="nombreNuevoProd" placeholder="Nombre dl producto"
+                    <input type="text" class="form-control" id="nombreNuevoProd" placeholder="Nombre del producto"
                         [(ngModel)]="nuevoProducto.nombre_prod">
                 </div>
                 <div class="input-group mb-3">
@@ -111,7 +111,7 @@
     </div>
 </div>
 
-<!-- Modal Para Editar productp -->
+<!-- Modal Para Editar producto -->
 <div class="modal fade" id="editarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
