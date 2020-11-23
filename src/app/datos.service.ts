@@ -49,8 +49,11 @@ export class DatosService {
     formData.append('nombre_prod', producto.nombre_prod);
     formData.append('precio_prod', producto.precio_prod);
     formData.append('desc_prod', producto.desc_prod);
-    formData.append('categoria', producto.categoria);
+    formData.append('tipo_prod', producto.tipo_prod);
+    formData.append('valor_prod', producto.valor_prod);
+    formData.append('estado_prod', producto.estado_prod);
     formData.append('url_prod', producto.url_prod);
+    
     return this.http.post(URL + "productos.php", formData, {headers:Headers});
   }
 
@@ -61,7 +64,9 @@ export class DatosService {
     Params = Params.append('nombre_prod', producto.nombre_prod);
     Params = Params.append('precio_prod', producto.precio_prod);
     Params = Params.append('desc_prod', producto.desc_prod);
-    Params = Params.append('categoria', producto.categoria);
+    Params = Params.append('valor_prod', producto.valor_prod);
+    Params = Params.append('tipo_prod', producto.tipo_prod);
+    Params = Params.append('estado_prod', producto.estado_prod);
     Params = Params.append('url_prod', producto.url_prod);
 
     Params = Params.append('id_prod', producto.id_prod);

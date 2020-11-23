@@ -43,14 +43,17 @@ switch($_SERVER['REQUEST_METHOD']){
     break;
     case "POST":
         if(isset($_POST['nombre_prod']) && isset($_POST['precio_prod']) &&
-            isset($_POST['desc_prod']) && isset($_POST['categoria']) &&
+            isset($_POST['desc_prod']) && isset($_POST['tipo_prod']) &&
+            isset($_POST['valor_prod']) && isset($_POST['estado_prod']) &&
             isset($_POST['url_prod'])){
             $datos = array(
                 'nombre_prod'=>$_POST['nombre_prod'],
                 'precio_prod'=>$_POST['precio_prod'],
                 'desc_prod'=>$_POST['desc_prod'],
-                'categoria'=>$_POST['categoria'],
-                'url_prod'=>$_POST['url_prod']
+                'url_prod'=>$_POST['url_prod'],
+                'tipo_prod'=>$_POST['tipo_prod'],
+                'valor_prod'=>$_POST['valor_prod'],
+                'estado_prod'=>$_POST['estado_prod']
             );
             try{
                 $reg = $tabla->create($datos);
@@ -66,14 +69,17 @@ switch($_SERVER['REQUEST_METHOD']){
     break;
     case "PUT":
         if(isset($_GET['nombre_prod']) && isset($_GET['precio_prod']) &&
-            isset($_GET['desc_prod']) && isset($_GET['categoria']) &&
+            isset($_GET['desc_prod']) && isset($_GET['tipo_prod']) &&
+            isset($_GET['valor_prod']) && isset($_GET['estado_prod']) &&
             isset($_GET['url_prod']) && isset($_GET['id_prod'])){
             if($data['level']=='A'){
                 $where = array('id_prod'=>$_GET['id_prod']);
                 $datos = array('nombre_prod'=>$_GET['nombre_prod'],
                                 'precio_prod'=>$_GET['precio_prod'],    
                                 'desc_prod'=>$_GET['desc_prod'],
-                                'categoria'=>$_GET['categoria'],
+                                'tipo_prod'=>$_GET['tipo_prod'],
+                                'valor_prod'=>$_GET['valor_prod'],
+                                'estado_prod'=>$_GET['estado_prod'],
                                 'url_prod'=>$_GET['url_prod']
                                 );
                 $reg = $tabla->update($datos,$where);

@@ -20,12 +20,10 @@
             <table class="table table-hover table-dark">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Descripcion</th>
                         <th>Categoria</th>
-                        <th>URL</th>
                         <th>Vista previa</th>
                         <th></th>
                         
@@ -33,12 +31,10 @@
                 </thead>
                 <tbody>
                     <tr  *ngFor="let producto of productos">
-                        <td>{{producto.id_prod}}</td>
                         <td>{{producto.nombre_prod}}</td>
                         <td>{{producto.precio_prod}}</td>
                         <td>{{producto.desc_prod}}</td>
-                        <td>{{producto.categoria}}</td>
-                        <td>{{producto.url_prod}}</td>
+                        <td>{{producto.tipo_prod}}</td>
                         <td><img src="{{producto.url_prod}}" alt="" width="80px"></td>
                         <td>
                             <button class="btn btn-primary btn-sm mb-3" *ngIf="level=='A'"
@@ -84,8 +80,43 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Categoria:</div>
                     </div>
-                    <input type="text" class="form-control" id="categoriaNuevoProd" placeholder="Categoria del producto"
-                        [(ngModel)]="nuevoProducto.categoria">
+                        <select class="form-control" id="sel1" [(ngModel)]="nuevoProducto.tipo_prod" name="sellist1">
+                            <option>Computadora</option>
+                            <option>Gabinete</option>
+                            <option>Water Cooling</option>
+                            <option>Accesorio</option>
+                            <option>Hardware</option>
+                        </select>
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Marca/Tipo:</div>
+                    </div>
+                        <select class="form-control" id="sel1" [(ngModel)]="nuevoProducto.valor_prod" name="sellist1">
+                            <option>Alienware</option>
+                            <option>Asus Gaming</option>
+                            <option>Spaces series</option>
+                            <option>Mouse</option>
+                            <option>Audio</option>
+                            <option>Pantalla</option>
+                            <option>Silla gamer</option>
+                            <option>Mandos</option>
+                            <option>Tarjeta de video</option>
+                            <option>Otro</option>
+                        </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Estado:</div>
+                    </div>
+                        <select class="form-control" id="sel1" [(ngModel)]="nuevoProducto.estado_prod" name="sellist1">
+                            <option>Nuevo</option>
+                            <option>Destacado</option>
+                            <option>Mas vendido</option>
+                            <option>Otro</option>
+                        </select>
+                    
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -98,7 +129,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">URL imagen:</div>
                     </div>
-                    <input type="url" class="form-control" id="precioNuevoProd" placeholder="URL del producto"
+                    <input type="url" class="form-control" value="../../assets/" id="urlNuevoProd" placeholder="URL del producto"
                         [(ngModel)]="nuevoProducto.url_prod">
                 </div>
             </div>
@@ -149,21 +180,56 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Categoria:</div>
                     </div>
-                    <input type="text" class="form-control" id="categoriaeditarProd" placeholder="Categoria del producto"
-                        [(ngModel)]="tmpProducto.categoria">
+                        <select class="form-control" id="sel1" [(ngModel)]="tmpProducto.tipo_prod" name="sellist1">
+                            <option>Computadora</option>
+                            <option>Gabinete</option>
+                            <option>Water Cooling</option>
+                            <option>Accesorio</option>
+                            <option>Hardware</option>
+                        </select>
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Marca/Tipo:</div>
+                    </div>
+                        <select class="form-control" id="sel1" [(ngModel)]="tmpProducto.valor_prod" name="sellist1">
+                            <option>Alienware</option>
+                            <option>Asus Gaming</option>
+                            <option>Spaces series</option>
+                            <option>Mouse</option>
+                            <option>Audio</option>
+                            <option>Pantalla</option>
+                            <option>Silla gamer</option>
+                            <option>Mandos</option>
+                            <option>Tarjeta de video</option>
+                            <option>Otro</option>
+                        </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Estado:</div>
+                    </div>
+                        <select class="form-control" id="sel1" [(ngModel)]="tmpProducto.estado_prod" name="sellist1">
+                            <option>Nuevo</option>
+                            <option>Destacado</option>
+                            <option>Mas vendido</option>
+                            <option>Otro</option>
+                        </select>
+                    
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Descripcion:</div>
                     </div>
-                    <textarea type="text" class="form-control" id="precioeditarProd" placeholder="Descripcion del producto" [(ngModel)]="tmpProducto.desc_prod"></textarea>
+                    <textarea type="text" class="form-control" id="precioNuevoProd" placeholder="Descripcion del producto" [(ngModel)]="tmpProducto.desc_prod"></textarea>
                     
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text">URL imagen:</div>
                     </div>
-                    <input type="url" class="form-control" id="precioeditarProd" placeholder="URL del producto"
+                    <input type="url" class="form-control" value="../../assets/" id="urleditarProd" placeholder="URL del producto"
                         [(ngModel)]="tmpProducto.url_prod">
                 </div>
             </div>

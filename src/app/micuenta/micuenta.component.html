@@ -6,8 +6,8 @@
 
             <div class="container text-black" >
                 <br>
-                <div >
-                    <img style="background-color: #343a40;" src="../../assets/img/perfil.jpg" class="rounded-circle mx-auto d-block m1-3 mt-3" alt="Ignacio Luz" width="180" >
+                <div class="marcoFoto">
+                    <img style="background-color: #343a40;" src="../../assets/img/perfil.jpg" class="rounded-circle border-white shadow bg-white mx-auto d-block m1-3 mt-3" alt="Ignacio Luz" width="180" >
                 </div>
 
                 
@@ -117,7 +117,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Cuenta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" style="color: red;" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -155,3 +155,18 @@
         </div>
     </div>
 </div>
+
+<Style>
+ 
+.marcoFoto img {
+    transition: all .5s ease;
+}
+ 
+.marcoFoto img:hover {
+    transform:scale(.8); /*cuando nos posicionamos sobre la imagen con esta propiedad aumentamos su escala y ademas la giramos*/
+    opacity:0.8;
+    
+}
+
+ 
+</Style>

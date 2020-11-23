@@ -16,8 +16,8 @@ export class ProductosComponent implements OnInit {
   level:string;
   user:string;
   
-  nuevoProducto = {id_prod:'',nombre_prod:'', precio_prod:'', desc_prod:'', categoria:'', url_prod:''};
-  tmpProducto = {id_prod:'',nombre_prod:'',  precio_prod:'', desc_prod:'', categoria:'', url_prod:''};
+  nuevoProducto = {id_prod:'',nombre_prod:'', precio_prod:'', tipo_prod:'Computadora',estado_prod:'Nuevo',valor_prod:'Alienware', desc_prod:'Sin descripcion', url_prod:''};
+  tmpProducto = {id_prod:'',nombre_prod:'',  precio_prod:'', tipo_prod:'',estado_prod:'',valor_prod:'', desc_prod:'', url_prod:''};
   constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
 
   ngOnInit(): void {
@@ -39,8 +39,9 @@ export class ProductosComponent implements OnInit {
 
   agregarProducto(){
     if(this.nuevoProducto.nombre_prod == '' && this.nuevoProducto.precio_prod == '' &&
-       this.nuevoProducto.desc_prod == '' && this.nuevoProducto.categoria == '' &&
-       this.nuevoProducto.url_prod == ''){
+       this.nuevoProducto.desc_prod == '' &&
+       this.nuevoProducto.url_prod == '' && this.nuevoProducto.tipo_prod == '' && 
+       this.nuevoProducto.valor_prod == '' && this.nuevoProducto.estado_prod == ''){
       this.msg.error("Completa todos los campos");
       return;
     }
@@ -50,9 +51,11 @@ export class ProductosComponent implements OnInit {
         this.productos.push(producto);
         this.nuevoProducto.nombre_prod = '';
         this.nuevoProducto.precio_prod = '';
-        this.nuevoProducto.desc_prod = '';
-        this.nuevoProducto.categoria = '';
+        this.nuevoProducto.desc_prod = 'Sin descripcion';
         this.nuevoProducto.url_prod = '';
+        this.nuevoProducto.tipo_prod = 'Computadora';
+        this.nuevoProducto.valor_prod = 'Alienware';
+       this.nuevoProducto.estado_prod = 'Nuevo';
         this.msg.success("El producto se guardo correctamente.");
       }else{
         this.msg.error("El producto no se ha podido guardar.");
@@ -74,7 +77,9 @@ export class ProductosComponent implements OnInit {
         this.productos[i].nombre_prod  = this.tmpProducto.nombre_prod ;
         this.productos[i].precio_prod = this.tmpProducto.precio_prod;
         this.productos[i].desc_prod = this.tmpProducto.desc_prod;
-        this.productos[i].categoria = this.tmpProducto.categoria;
+        this.productos[i].tipo_prod = this.tmpProducto.tipo_prod;
+        this.productos[i].valor_prod = this.tmpProducto.valor_prod;
+        this.productos[i].estado_prod = this.tmpProducto.estado_prod;
         this.productos[i].url_prod = this.tmpProducto.url_prod;
         this.llenarProductos();
         this.msg.success("El Producto se guardo correctamente.");
