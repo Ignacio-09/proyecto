@@ -1,6 +1,5 @@
 <div class="container rounded border mb-3 mt-3 shadow bg-white">
-    <br>
-    <br>
+    <div class="text-center mt-4 mb-4 text-dark"><h2>Mi cuenta</h2></div>
     <div class="row justify-content-center">
         <div class="col-sm-3">
 
@@ -83,15 +82,15 @@
                     [(ngModel)]="usuario[0].fecha_nac"  #fecha = "ngModel" [disabled] = '!editar'>
                     <span *ngIf="fecha.touched && !fecha.valid && editar; then requerido"></span>
                 </div>
-                <br>
-                <div class="text-right" *ngIf="editar; then siEditar else noEditar">
+                <br><br><br>
+                <div class="text-right mt-6" *ngIf="editar; then siEditar else noEditar">
                     <!--Aqui van los ng-templates para editar-->
                 </div>
                 
             </form>
                     
         </div>
-    </div><br><br>
+    </div><br><br><br><br>
 </div>
 
 
@@ -157,16 +156,11 @@
 </div>
 
 <Style>
- 
 .marcoFoto img {
     transition: all .5s ease;
 }
- 
 .marcoFoto img:hover {
-    transform:scale(.8); /*cuando nos posicionamos sobre la imagen con esta propiedad aumentamos su escala y ademas la giramos*/
+    transform:scale(.8); 
     opacity:0.8;
-    
 }
-
- 
-</Style>
+ </Style>

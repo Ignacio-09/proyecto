@@ -2,20 +2,20 @@
     <!--  Navbar red social-->
     <nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#343a40" class="container-fluid">
         <div class="media-body"></div>
-        <div class="text-right mr-2">
-        <div class="btn-group" >
-            <button style="margin: 10%;" type="button" [style.background]="user!='' ?'transparent':'rgb(11, 55, 250, 0.897)'" class="btn btn-primary dropdown-toggle float-right" data-toggle="dropdown"><i
-                    class="fas fa-user-circle mr-1"></i>
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{cuenta}}</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" *ngIf="level=='U'" routerLink="/micuenta"><i class="fas fa-cog m-1"></i>Mi cuenta</a>
-                <a class="dropdown-item" *ngIf="user==''" routerLink= "/login"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar
-                    sesión</a>
-                <a class="dropdown-item" *ngIf="user==''" routerLink= "/registro"><i class="fas fa-user-plus mr-1"></i>Registrase</a>
-                <a class="dropdown-item" *ngIf="user!=''" (click)="salir()" style="cursor: pointer;"><i class="fas fa-sign-out-alt mr-1"></i>Cerrar
-                    sesion</a>
-            </div>  
-        </div>
+        <div class="text-right mr-3 pr-5">
+            <div class="btn-group" >
+                <button style="margin: 10%;" type="button" [style.background]="user!='' ?'transparent':'rgb(11, 55, 250, 0.897)'" class="btn btn-primary dropdown-toggle float-right" data-toggle="dropdown"><i
+                        class="fas fa-user-circle mr-1"></i>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{cuenta}}</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" *ngIf="level=='U'" routerLink="/micuenta"><i class="fas fa-cog mr-1"></i>Mi cuenta</a>
+                    <a class="dropdown-item" *ngIf="user==''" routerLink= "/login"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar
+                        sesión</a>
+                    <a class="dropdown-item" *ngIf="user==''" routerLink= "/registro"><i class="fas fa-user-plus mr-1"></i>Registrase</a>
+                    <a class="dropdown-item" *ngIf="user!=''" (click)="salir()" style="cursor: pointer;"><i class="fas fa-sign-out-alt mr-1"></i>Cerrar
+                        sesion</a>
+                </div>  
+            </div>
         </div>
     </nav>
     <!--Barra de busqueda-->

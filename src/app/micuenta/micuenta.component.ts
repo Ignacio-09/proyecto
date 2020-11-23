@@ -21,9 +21,8 @@ export class MicuentaComponent implements OnInit, OnDestroy {
     this.user = this.datos.getCuenta().user;
     this.llenarUsuario();
     this.editar = false;
-    if(this.user == ''){
-      this.msg.error("No has iniciado sesion");
-      return ;
+    if(this.user == '' ||this.level=='A'){
+      this.router.navigate(['/inicio']);
     }
   }
 

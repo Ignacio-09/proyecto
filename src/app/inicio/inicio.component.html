@@ -1,14 +1,5 @@
 <app-menu></app-menu>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-</head>
-
-
-<body>
     <!--carrousel-->
-
     <div class="container rounded mt-3 shadow ">
         <div id="demo" class="carousel slide" data-ride="carousel">
             <!-- Indicadores -->
@@ -45,55 +36,57 @@
     <br>
     <br>
     <!--columnas menu alterno-->
-    <div class="row" style="font-family: 'Arial'; font-size: 12px; ">
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="computadoras.html">
-                <img src="../../assets/img/submenu/computadora.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
-                <br>
-                <br>
-                <p>COMPUTADORAS</p>
-            </a>
-        </div>
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="gabinetes.html">
-                <img src="../../assets/img/submenu/gabinete.png" class="zoom img-responsive" alt="titulo" style="width:54px;" />
-                <br>
-                <br>
-                <p>GABINETES</p>
-            </a>
-        </div>
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="cooler.html">
-                <img src="../../assets/img/submenu/cooler.png" class="zoom img-responsive" alt="titulo" style="width:100px;" />
-                <br>
-                <br>
-                <br>
-                <p>WATER COOLING</p>
-            </a>
-        </div>
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="tarjetas.html">
-                <img src="../../assets/img/submenu/tarjeta.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
-                <br>
-                <br>
-                <p>TARJETAS DE VIDEO</p>
-            </a>
-        </div>
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="perifericos.html">
-                <img src="../../assets/img/submenu/perfifericos.png" class="zoom img-responsive" alt="titulo" style="width:85px;" />
-                <br>
-                <br>
-                <p>PERIFERICOS</p>
-            </a>
-        </div>
-        <div class="col-sm-2" align="center">
-            <a title="computadoras" href="accesorios.html">
-                <img src="../../assets/img/submenu/silla.png" class="zoom img-responsive" alt="titulo" style="width:70px;" />
-                <br>
-                <br>
-                <p>ACCESORIOS</p>
-            </a>
+    <div class="container-fluid">
+        <div class="row" style="font-family: 'Arial'; font-size: 12px; ">
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="computadoras.html">
+                    <img src="../../assets/img/submenu/computadora.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
+                    <br>
+                    <br>
+                    <p>COMPUTADORAS</p>
+                </a>
+            </div>
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="gabinetes.html">
+                    <img src="../../assets/img/submenu/gabinete.png" class="zoom img-responsive" alt="titulo" style="width:54px;" />
+                    <br>
+                    <br>
+                    <p>GABINETES</p>
+                </a>
+            </div>
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="cooler.html">
+                    <img src="../../assets/img/submenu/cooler.png" class="zoom img-responsive" alt="titulo" style="width:100px;" />
+                    <br>
+                    <br>
+                    <br>
+                    <p>WATER COOLING</p>
+                </a>
+            </div>
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="tarjetas.html">
+                    <img src="../../assets/img/submenu/tarjeta.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
+                    <br>
+                    <br>
+                    <p>TARJETAS DE VIDEO</p>
+                </a>
+            </div>
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="perifericos.html">
+                    <img src="../../assets/img/submenu/perfifericos.png" class="zoom img-responsive" alt="titulo" style="width:85px;" />
+                    <br>
+                    <br>
+                    <p>PERIFERICOS</p>
+                </a>
+            </div>
+            <div class="col-sm-2" align="center">
+                <a title="computadoras" href="accesorios.html">
+                    <img src="../../assets/img/submenu/silla.png" class="zoom img-responsive" alt="titulo" style="width:70px;" />
+                    <br>
+                    <br>
+                    <p>ACCESORIOS</p>
+                </a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -121,7 +114,7 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="container-fluid rounded mt-3 shadow ">
                     <div class="row">
-                        <div class="col" *ngFor="let producto of productos; let i=index">
+                        <div class="col" align="center" *ngFor="let producto of productos; let i=index">
                            
                                 <div class="tarjeta-wrap" >
                                     <div class="tarjeta" >
@@ -220,5 +213,4 @@
     </div>
     </section>
     <br>
-</body>
-</html>
+

@@ -22,8 +22,11 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.level = '';
+    if (this.datos.getCuenta().user != '') {
+      this.router.navigate(['/inicio']);
+    } else {
     this.msg.success("Bienvenido");
-    
+    }
   }
   
   comprobarUsuarios(){

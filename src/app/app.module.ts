@@ -13,6 +13,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { DatosService } from './datos.service';
+import { SeguridadGuard } from './seguridad.guard';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ProductosComponent } from './productos/productos.component';
@@ -24,8 +25,8 @@ const rutas: Route[] = [
   {path:'inicio', component: InicioComponent},
   {path:'login', component: LoginComponent},
   {path:'registro', component: RegistroComponent},
-  {path:'productos', component: ProductosComponent},
-  {path:'usuarios', component: UsuariosComponent},
+  {path:'productos', component: ProductosComponent, canActivate: [SeguridadGuard]},
+  {path:'usuarios', component: UsuariosComponent, canActivate: [SeguridadGuard]},
   {path:'micuenta', component: MicuentaComponent},
   {path:'**', component: InicioComponent}
 ]
@@ -51,7 +52,7 @@ const rutas: Route[] = [
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
   ],
-  providers: [DatosService,CookieService],
+  providers: [DatosService,CookieService,SeguridadGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -35,7 +35,7 @@
                         <td>{{producto.precio_prod}}</td>
                         <td>{{producto.desc_prod}}</td>
                         <td>{{producto.tipo_prod}}</td>
-                        <td><img src="{{producto.url_prod}}" alt="" width="80px"></td>
+                        <td class=""><img src="{{producto.url_prod}}" class="zoom img-responsive" alt="" width="80px"></td>
                         <td>
                             <button class="btn btn-primary btn-sm mb-3" *ngIf="level=='A'"
                             (click)="temporalProducto(producto)" data-toggle='modal' data-target='#editarProducto'><i class="fas fa-pen"></i></button>
@@ -122,7 +122,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Descripcion:</div>
                     </div>
-                    <textarea type="text" class="form-control" id="precioNuevoProd" placeholder="Descripcion del producto" [(ngModel)]="nuevoProducto.desc_prod"></textarea>
+                    <textarea type="text" class="form-control" value="Sin descripcion" id="precioNuevoProd" placeholder="Descripcion del producto" [(ngModel)]="nuevoProducto.desc_prod"></textarea>
                     
                 </div>
                 <div class="input-group mb-3">
