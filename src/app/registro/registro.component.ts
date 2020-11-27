@@ -13,6 +13,8 @@ export class RegistroComponent implements OnInit, OnDestroy {
   user:string;
   pass:string;
 
+  acepta: boolean = true;
+  oferta: boolean = true;
   existe: boolean = false;
   nuevoUser:any = {user:"", pass:"", tipo:"U", nombre:"", apellidos:"", correo:"", fecha:""};
   tmpUser:any = {user:""};
@@ -49,7 +51,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
     if(this.nuevoUser.user == '' ||this.nuevoUser.pass == '' ||
       this.nuevoUser.tipo == '' || this.nuevoUser.nombre == ''  ||
       this.nuevoUser.apellidos == '' || this.nuevoUser.correo == ''  ||
-      this.nuevoUser.fecha == '' ){
+      this.nuevoUser.fecha == '' || this.acepta ==false ){
       this.msg.error("Completa todos los campos");
       return;
     }
@@ -57,6 +59,20 @@ export class RegistroComponent implements OnInit, OnDestroy {
     if(this.nuevoUser.user == this.tmpUser.user) {
       this.msg.error("Usuario ya existente");
       return;
+    }
+
+    if(this.oferta==true){
+          this.datos.postSeguidors(this.nuevoUser.correo).subscribe(resp=>{
+            if(resp['result']=='ok'){
+              this.oferta = false;
+              
+            }else{
+              this.oferta = false;
+              
+            }
+          }, error=>{
+            console.log(error);
+          });
     }
 
     this.datos.postUsuario(this.nuevoUser).subscribe(resp => {
@@ -70,7 +86,7 @@ export class RegistroComponent implements OnInit, OnDestroy {
         this.nuevoUser.correo = '';
         this.nuevoUser.fecha = '';
         this.msg.success("El usuario se guardo correctamente.");
-        console.log("Exito");
+        
       }else{
         this.msg.error("El usuario no se ha podido guardar.");
       }

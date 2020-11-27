@@ -74,14 +74,16 @@
 
                 <div class="form-check">
                     <label class="form-check-label" for="radio1">
-                        <input type="checkbox" class="form-check-input" id="radio1" name="optradio"
+                        <input type="checkbox" class="form-check-input" id="ofertas" name="ofertas" [(ngModel)]="oferta"  
                             value="option1" checked>Recibir actualizaciones y ofertas
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label" for="radio2">
-                        <input type="checkbox" class="form-check-input" id="radio2" name="optradio"
-                            value="option2" checked> <a class="alert-link" style="cursor: pointer;" data-toggle='modal' data-target='#mostrarTerminos'>Acepta terminos y condiciones</a>
+                        <input type="checkbox" class="form-check-input" id="aceptar" name="aceptar" [(ngModel)]="acepta"  
+                            value="option2" #aceptar ="ngModel" checked> <a class="alert-link" style="cursor: pointer;" data-toggle='modal' data-target='#mostrarTerminos'>Acepta terminos y condiciones</a>
+                            <span *ngIf="aceptar.touched && !acepta; then requerido"></span>
+
                     </label>
                 </div>
                 <br>
