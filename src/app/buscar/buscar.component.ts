@@ -1,43 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from '../datos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  selector: 'app-buscar',
+  templateUrl: './buscar.component.html',
+  styleUrls: ['./buscar.component.css']
 })
-export class InicioComponent implements OnInit {
+export class BuscarComponent implements OnInit {
+
   level:string;
   user:string;
   productos:any;
 
+  tipo:string;
   piezas:number = 1;
+
   carrito:any = {user:"",id_prod:"", nombre_prod:"", precio_car:"", piezas_car:""};
   tmpProd:any = {id_prod:"", nombre_prod:"", precio_car:""};
   carritos:any = [];
-  constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
+
+  constructor(private datos:DatosService, private router:Router,private route:ActivatedRoute, private msg:ToastrService) { }
 
   ngOnInit(): void {
     this.level = this.datos.getCuenta().level;
     this.user = this.datos.getCuenta().user;
-    this.llenarProductos();
-   
+    
     if (this.level ==  'U') {
       this.llenarCarrito(this.user);
     }
+    
+
+    this.route.params.subscribe((params:Params)=>{
+      this.tipo = params.valor;
+      this.buscarProductos();
+    });
+    
   }
 
-  llenarProductos(){
-    this.datos.getProductos().subscribe(resp => {
-      this.productos = resp;
+  buscarProductos(){
+    if(this.tipo != ''){
+      this.datos.buscarProd(this.tipo).subscribe(resp => {
+          this.productos = resp;
+      }, error => {
+        console.log(error);
+      });
+    } else {
       
-    }, error => {
-      console.log(error);
-      if(error.status==408) this.router.navigate(['']);
-    })
+    }
   }
+
   llenarCarrito(user){
     this.datos.getCarrito(user).subscribe(resp => {
       this.carritos = resp;
@@ -60,12 +73,11 @@ export class InicioComponent implements OnInit {
     this.carrito.precio_car = this.tmpProd.precio_prod;
     this.carrito.piezas_car = this.piezas;
     
-    
     this.datos.postCarrito(this.carrito).subscribe(resp => {
       if(resp['result']=='ok'){
         let carro = JSON.parse(JSON.stringify(this.carrito));
         this.carritos.push(carro);
-       
+        console.log(this.carritos);
         this.tmpProd.id_prod = '';
         this.tmpProd.nombre_prod = '';
         this.tmpProd.precio_prod = '';
@@ -89,5 +101,6 @@ export class InicioComponent implements OnInit {
       return false;
     }
   }
-}
 
+
+}

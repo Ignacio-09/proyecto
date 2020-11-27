@@ -9,7 +9,6 @@ const URL:string = "http://localhost/crud/";
 })
 export class DatosService {
   private cuenta = {user:"", token:"", level:""}
-  private temaActivo = {idtema:'', nombre:''};
 
   constructor(private http: HttpClient, private galleta:CookieService) { }
 
@@ -71,7 +70,7 @@ export class DatosService {
 
     Params = Params.append('id_prod', producto.id_prod);
     console.log(Headers);
-    console.log(Params);
+    
     return this.http.put(URL + "productos.php", null, {headers: Headers, params: Params});
   }
 
@@ -88,8 +87,15 @@ export class DatosService {
     Headers = Headers.append('Authorization', this.cuenta.token);
     let Params = new HttpParams();
     Params = Params.append('nombre_prod', buscar);  
-    console.log(Params);
+    
     return this.http.get(URL + "productos.php", {headers:Headers, params:Params});
+  }
+
+  buscarProd(buscar){
+    let Params = new HttpParams();
+    Params = Params.append('nombre_prod', buscar);  
+    
+    return this.http.get(URL + "inicio.php", {params:Params});
   }
 
   postUsuario(usuario){
@@ -121,7 +127,7 @@ export class DatosService {
   getUsuarios(){
     let Headers = new HttpHeaders();
     Headers = Headers.append('Authorization', this.cuenta.token);
-    console.log(Headers);
+    
     return this.http.get(URL + "usuarios.php", {headers:Headers});
   }
 
@@ -130,7 +136,7 @@ export class DatosService {
     Headers = Headers.append('Authorization', this.cuenta.token);
     let Params = new HttpParams();
     Params = Params.append('user', user);  
-    console.log(Params);
+    
     return this.http.get(URL + "usuarios.php", {headers:Headers, params:Params});
   }
 
@@ -139,7 +145,7 @@ export class DatosService {
     Headers = Headers.append('Authorization', this.cuenta.token);
     let Params = new HttpParams();
     Params = Params.append('buscar', buscar);  
-    console.log(Params);
+    
     return this.http.get(URL + "usuarios.php", {headers:Headers, params:Params});
   }
 
@@ -187,6 +193,73 @@ export class DatosService {
     return this.http.delete(URL + "usuarios.php", {headers: Headers, params: Params});
   }
 
+  getCarrito(user){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('user', user);  
+    
+    return this.http.get(URL + "carrito.php", {headers:Headers, params:Params});
+  }
+
+  postCarrito(carrito){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let formData = new FormData();
+    formData.append('user', carrito.user);  
+    formData.append('nombre_prod', carrito.nombre_prod);
+    formData.append('id_prod', carrito.id_prod);
+    formData.append('precio_car', carrito.precio_car);
+    formData.append('piezas_car', carrito.piezas_car);
+    console.log(this.cuenta.token);
+    return this.http.post(URL + "carrito.php", formData,{headers: Headers});
+  }
+
+  putCarrito(carrito){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('id_car', carrito.id_car);
+    Params = Params.append('piezas_car', carrito.piezas_car);
+
+    return this.http.put(URL + "carrito.php", null, {headers: Headers, params: Params});
+  }
+
+  deleteCarrito(carrito){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    let Params = new HttpParams();
+    Params = Params.append('user', carrito.user);
+    Params = Params.append('id_prod', carrito.id_prod);
+    return this.http.delete(URL + "carrito.php", {headers: Headers, params: Params});
+  }
+
+  postSeguidors(correo){
+    let formData = new FormData();
+    formData.append('correo_seg', correo);  
+    return this.http.post(URL + "seguidores.php", formData);
+  }
+
+  getSeguidores(){
+
+    return this.http.get(URL + "seguidores.php");
+  }
+
+  deleteSeg(seguidor){
+    let Headers = new HttpHeaders();
+    Headers = Headers.append('Authorization', this.cuenta.token);
+    
+    let Params = new HttpParams();
+    Params = Params.append('correo_seg', seguidor.correo_seg);
+
+    return this.http.delete(URL + "usuarios.php", {headers: Headers, params: Params});
+  }
+
+  buscarSeguidor(buscar){
+    let Params = new HttpParams();
+    Params = Params.append('buscar', buscar);  
+    return this.http.get(URL + "seguidores.php", {params:Params});
+  }
 
 }
 

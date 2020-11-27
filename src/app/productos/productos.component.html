@@ -4,7 +4,7 @@
         <div class="col-sm-8" ></div>
         <div class="col-sm-4">
             <form class="form-inline mt-3">
-                <input class="form-control" type="text" name="buscar" placeholder="Buscar" (keyup)="buscarProductos()" [(ngModel)]="buscar">
+                <input class="form-control" type="text" name="buscar" title = "Ingresa Producto o Categoria"placeholder="Producto/Categoria" (keyup)="buscarProductos()" [(ngModel)]="buscar">
                 
                 <button class="btn btn-info ml-1" (click)="buscarProductos()"><i class="fa fa-search mr-1"></i>Buscar</button>
             </form>
@@ -32,8 +32,8 @@
                 <tbody>
                     <tr  *ngFor="let producto of productos">
                         <td>{{producto.nombre_prod}}</td>
-                        <td>{{producto.precio_prod}}</td>
-                        <td>{{producto.desc_prod}}</td>
+                        <td>${{producto.precio_prod}}</td>
+                        <td (click)="temporalProducto(producto)" data-toggle='modal' data-target='#editarProducto'>{{producto.desc_prod}}</td>
                         <td>{{producto.tipo_prod}}</td>
                         <td class=""><img src="{{producto.url_prod}}" class="zoom img-responsive" alt="" width="80px"></td>
                         <td>
@@ -85,6 +85,7 @@
                             <option>Gabinete</option>
                             <option>Water Cooling</option>
                             <option>Accesorio</option>
+                            <option>Tarjetas</option>
                             <option>Hardware</option>
                         </select>
                     
@@ -103,6 +104,7 @@
                             <option>Silla gamer</option>
                             <option>Mandos</option>
                             <option>Tarjeta de video</option>
+                            <option>RAM</option>
                             <option>Otro</option>
                         </select>
                 </div>
@@ -153,7 +155,7 @@
                     <div class="input-group-prepend" >
                         <div class="input-group-text">Id:</div>
                     </div>
-                    <input type="text" class="form-control col-sm-2" size="5" id="nombreeditarProd"
+                    <input type="text" class="form-control col-sm-4" size="5" id="nombreeditarProd"
                         [(ngModel)]="tmpProducto.id_prod" disabled>
                 </div>
 
@@ -185,6 +187,7 @@
                             <option>Gabinete</option>
                             <option>Water Cooling</option>
                             <option>Accesorio</option>
+                            <option>Tarjetas</option>
                             <option>Hardware</option>
                         </select>
                     
@@ -203,6 +206,7 @@
                             <option>Silla gamer</option>
                             <option>Mandos</option>
                             <option>Tarjeta de video</option>
+                            <option>RAM</option>
                             <option>Otro</option>
                         </select>
                 </div>

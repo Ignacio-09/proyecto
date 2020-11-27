@@ -32,7 +32,7 @@ switch($_SERVER['REQUEST_METHOD']){
             $res = $tabla->Read($where);
         }else if (isset($_GET['nombre_prod'])){
             $prod = $_GET['nombre_prod'];
-            $sql = "SELECT * FROM productos where nombre_prod like '%$prod%'";
+            $sql = "SELECT * FROM productos where nombre_prod like '%$prod%' or tipo_prod like '%$prod%' ";
             $res = $tabla->sql_execute($sql);
         }else{
             $res = $tabla->ReadAll();

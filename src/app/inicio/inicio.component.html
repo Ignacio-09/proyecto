@@ -1,6 +1,9 @@
 <app-menu></app-menu>
+    <html lang="es">
+
+    
     <!--carrousel-->
-    <div class="container rounded mt-3 shadow ">
+    <div class="container mt-3 ">
         <div id="demo" class="carousel slide" data-ride="carousel">
             <!-- Indicadores -->
             <ul class="carousel-indicators">
@@ -11,15 +14,15 @@
             <!-- Las Diapositivas -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <a href="perifericos.html"><img src="../../assets/img/banners/banner1.png" alt="carrusel 1" width="1200" height="380">
+                    <a routerLink="/hardware"><img src="../../assets/img/banners/banner1.png" alt="carrusel 1" width="1200" height="380">
                     </a>
                     </div>
                 <div class="carousel-item">
-                    <a href="accesorios.html"><img src="../../assets/img/banners/banner2.png" alt="carrusel 2" width="1200" height="380">
+                    <a routerLink="/accesorios"><img src="../../assets/img/banners/banner2.png" alt="carrusel 2" width="1200" height="380">
                 </a>
                 </div>
                 <div class="carousel-item">
-                    <a href="computadoras.html"><img src="../../assets/img/banners/banner3.png" alt="carrusel 3" width="1200" height="380">
+                    <a routerLink="/conputadoras"><img src="../../assets/img/banners/banner3.png" alt="carrusel 3" width="1200" height="380">
                </a>
                     </div>
             </div>
@@ -37,9 +40,17 @@
     <br>
     <!--columnas menu alterno-->
     <div class="container-fluid">
+        <div class="alert alert-info alert-dismissible" *ngIf="user==''">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Para poder agregar <b>productos</b> al carrito debes <a routerLink="/login" class="alert-link">iniciar sesión</a> o <a class="alert-link" routerLink="/registro" >registrarte</a>.
+        </div>
+        <div class="alert alert-info alert-dismissible" *ngIf="level=='U'">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Puedes ver los <b>productos</b>  y dar click en el botón <b>Añadir</b> para agregar a tu <a routerLink="/carrito" class="alert-link">carrito</a>.
+        </div>
         <div class="row" style="font-family: 'Arial'; font-size: 12px; ">
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="computadoras.html">
+                <a title="computadoras" routerLink='/computadoras'>
                     <img src="../../assets/img/submenu/computadora.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
                     <br>
                     <br>
@@ -47,7 +58,7 @@
                 </a>
             </div>
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="gabinetes.html">
+                <a title="computadoras" routerLink="/partes/Gabinete">
                     <img src="../../assets/img/submenu/gabinete.png" class="zoom img-responsive" alt="titulo" style="width:54px;" />
                     <br>
                     <br>
@@ -55,7 +66,7 @@
                 </a>
             </div>
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="cooler.html">
+                <a title="computadoras" routerLink="/partes/Water Cooling">
                     <img src="../../assets/img/submenu/cooler.png" class="zoom img-responsive" alt="titulo" style="width:100px;" />
                     <br>
                     <br>
@@ -64,7 +75,7 @@
                 </a>
             </div>
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="tarjetas.html">
+                <a title="computadoras" routerLink="/partes/Tarjetas">
                     <img src="../../assets/img/submenu/tarjeta.png" class="zoom img-responsive" alt="titulo" style="width:110px;" />
                     <br>
                     <br>
@@ -72,7 +83,7 @@
                 </a>
             </div>
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="perifericos.html">
+                <a title="computadoras" routerLink="/hardware/Audio">
                     <img src="../../assets/img/submenu/perfifericos.png" class="zoom img-responsive" alt="titulo" style="width:85px;" />
                     <br>
                     <br>
@@ -80,7 +91,7 @@
                 </a>
             </div>
             <div class="col-sm-2" align="center">
-                <a title="computadoras" href="accesorios.html">
+                <a title="computadoras" routerLink="/accesorios/Sillas">
                     <img src="../../assets/img/submenu/silla.png" class="zoom img-responsive" alt="titulo" style="width:70px;" />
                     <br>
                     <br>
@@ -114,32 +125,34 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="container-fluid rounded mt-3 shadow ">
                     <div class="row">
-                        <div class="col" align="center" *ngFor="let producto of productos; let i=index">
-                           
-                                <div class="tarjeta-wrap" >
-                                    <div class="tarjeta" >
-                                        <div class="adelante"
-                                            style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
-                                        <div class="atras ">
-                                            <ul style="padding: 10px;" class="text-center">
-                                                <h6>{{producto.nombre_prod}}</h6>
-                                                <br>
-                                                    <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
-                                                    <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
-                                                <br>
-                                                <br>
-                                                <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
-                                                    <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
-                                                    <div *ngIf="!existe(producto)"><button type="submit" class="btn btn-primary btn-xs" (click)="agregarCarrito(producto)"><i
-                                                            class="fas fa-credit-card" ></i> Añadir</button></div>
-                                                </div>
-                                            </ul>
+                        <span *ngFor="let producto of productos;">
+                            <div class="col-sm"  align="center" *ngIf="producto.estado_prod == 'Nuevo'">
+                                <span align="center">
+                                    <div class="tarjeta-wrap pr-4" >
+                                        <div class="tarjeta" >
+                                            <div class="adelante"
+                                                style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
+                                            <div class="atras">
+                                                <ul style="padding: 10px;" class="text-center">
+                                                    <h6>{{producto.nombre_prod}}</h6>
+                                                    <br>
+                                                        <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
+                                                        <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
+                                                    <br>
+                                                    <br>
+                                                    <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
+                                                        <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
+                                                        <div *ngIf="!existe(producto)"><button type="submit" (click)="tmpCarrito(producto)" class="btn btn-primary btn-xs" data-toggle='modal' data-target='#confirmarProducto'><i
+                                                                class="fas fa-credit-card" ></i> Añadir</button></div>
+                                                    </div>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            
-                        </div>
-                    </div>
+                                </span>
+                            </div>
+                        </span>
+                    </div><br><br><br>
                 </div>
 <!--cada 4-->
             </div>
@@ -148,32 +161,34 @@
             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="container-fluid rounded mt-3 shadow ">
                     <div class="row">
-                        <div class="col" *ngFor="let producto of productos; let i=index">
-                           
-                                <div class="tarjeta-wrap" >
-                                    <div class="tarjeta" >
-                                        <div class="adelante"
-                                            style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
-                                        <div class="atras">
-                                            <ul style="padding: 10px;" class="text-center">
-                                                <h6>{{producto.nombre_prod}}</h6>
-                                                <br>
-                                                    <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
-                                                    <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
-                                                <br>
-                                                <br>
-                                                <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
-                                                    <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
-                                                    <div *ngIf="!existe(producto)"><button type="submit" class="btn btn-primary btn-xs" (click)="agregarCarrito(producto)"><i
-                                                            class="fas fa-credit-card" ></i> Añadir</button></div>
-                                                </div>
-                                            </ul>
+                        <span *ngFor="let producto of productos; let i=index">
+                            <div class="col-sm"  align="center" *ngIf="producto.estado_prod == 'Mas vendido'">
+                                <span align="center">
+                                    <div class="tarjeta-wrap pr-4" >
+                                        <div class="tarjeta" >
+                                            <div class="adelante"
+                                                style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
+                                            <div class="atras">
+                                                <ul style="padding: 10px;" class="text-center">
+                                                    <h6>{{producto.nombre_prod}}</h6>
+                                                    <br>
+                                                        <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
+                                                        <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
+                                                    <br>
+                                                    <br>
+                                                    <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
+                                                        <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
+                                                        <div *ngIf="!existe(producto)"><button type="submit" (click)="tmpCarrito(producto)" class="btn btn-primary btn-xs" data-toggle='modal' data-target='#confirmarProducto'><i
+                                                                class="fas fa-credit-card" ></i> Añadir</button></div>
+                                                    </div>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            
-                        </div>
-                    </div>
+                                </span>
+                            </div>
+                        </span>
+                    </div><br><br><br>
                 </div>
 <!--cada 4-->
             </div>
@@ -182,35 +197,81 @@
             <div class="tab-pane fade show" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="container-fluid rounded mt-3 shadow ">
                     <div class="row">
-                        <div class="col text-center " *ngFor="let producto of productos; let i=index">
-                                <div class="tarjeta-wrap" >
-                                    <div class="tarjeta" >
-                                        <div class="adelante"
-                                            style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
-                                        <div class="atras">
-                                            <ul style="padding: 10px;" class="text-center">
-                                                <h6>{{producto.nombre_prod}}</h6>
-                                                <br>
-                                                    <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
-                                                    <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
-                                                <br>
-                                                <br>
-                                                <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
-                                                    <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
-                                                    <div *ngIf="!existe(producto)"><button type="submit" class="btn btn-primary btn-xs" (click)="agregarCarrito(producto)"><i
-                                                            class="fas fa-credit-card" ></i> Añadir</button></div>
-                                                </div>
-                                            </ul>
+                        <span *ngFor="let producto of productos; let i=index">
+                            <div class="col-sm"  align="center" *ngIf="producto.estado_prod == 'Destacado'">
+                                <span align="center">
+                                    <div class="tarjeta-wrap pr-4" >
+                                        <div class="tarjeta" >
+                                            <div class="adelante"
+                                                style="background-size: cover; background-image: url({{producto.url_prod}});"></div>
+                                            <div class="atras">
+                                                <ul style="padding: 10px;" class="text-center">
+                                                    <h6>{{producto.nombre_prod}}</h6>
+                                                    <br>
+                                                        <p [style.color]="'white'" class="text-center"><b>$ {{producto.precio_prod}}</b></p>
+                                                        <p *ngIf="producto.desc_prod !='Sin descripcion'">{{producto.desc_prod}}</p>
+                                                    <br>
+                                                    <br>
+                                                    <div class="form-group" style="margin-top: 50px;" *ngIf="level=='U'">
+                                                        <div *ngIf="existe(producto)" class="text-success text-center"> <h4>!!Ya en tu carrito!!</h4></div>
+                                                        <div *ngIf="!existe(producto)"><button type="submit" (click)="tmpCarrito(producto)" class="btn btn-primary btn-xs" data-toggle='modal' data-target='#confirmarProducto'><i
+                                                                class="fas fa-credit-card" ></i> Añadir</button></div>
+                                                    </div>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            
-                        </div>
-                    </div>
+                                </span>
+                            </div>
+                        </span>
+                    </div><br><br><br>
                 </div>
                 <!--cada 4-->
         </div>
     </div>
     </section>
     <br>
+    </html>
 
+    <!-- Modal Para Nuevo Producto -->
+<div class="modal fade" id="confirmarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLongTitle">Agregar a Carrito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Producto:</div>
+                </div>
+                <input type="text"  class="form-control" id="tmpnomProd"
+                    [(ngModel)]="tmpProd.nombre_prod" disabled>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" >Precio c/u:</div>
+                </div>
+                <input type="text" class="form-control" id="tmpprecioProd"
+                    [(ngModel)]="tmpProd.precio_prod" disabled>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Piezas:</div>
+                </div>
+                <input type="number" min="1" max="5" class="form-control" id="piezasProd" value="1"placeholder="Piezas"
+                    [(ngModel)]="piezas">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="agregarCarrito()">Agregar a carrito</button>
+        </div>
+    </div>
+</div>
+</div>

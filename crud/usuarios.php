@@ -33,7 +33,7 @@ switch($_SERVER['REQUEST_METHOD']){
             $res = $usuarios->sql_execute($sql);
         } else if(isset($_GET['buscar'])){
             $user = $_GET['buscar'];
-            $sql = "SELECT * FROM usuarios where user like '%$user%'";
+            $sql = "SELECT * FROM usuarios where user like '%$user%' or nombre like '%$user%'";
             $res = $usuarios->sql_execute($sql);
         } else{
             $res = $usuarios->ReadAll();
@@ -112,6 +112,11 @@ switch($_SERVER['REQUEST_METHOD']){
             $reg = $usuarios->delete($where);
             $res = array("result"=>"ok","msg"=>"Se elimino el usuario", "num"=>$reg);
         
+        }else if(isset($_GET['correo_seg'])){
+            $where = array('correo_seg'=>$_GET['correo_seg']);
+            $seguidores = new DataBase('seguidores');
+            $reg = $seguidores->delete($where);
+            $res = array("result"=>"ok","msg"=>"Se elimino el seguidor", "num"=>$reg);
         }else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }

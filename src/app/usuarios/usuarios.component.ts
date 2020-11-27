@@ -63,7 +63,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   temporalUsuario(user){
-    console.log(user);
+    
     this.tmpUser = JSON.parse(JSON.stringify(user));
   }
 
@@ -104,7 +104,7 @@ export class UsuariosComponent implements OnInit {
       
       this.datos.buscarUsuario(this.buscar).subscribe(resp => {
           this.usuarios = resp;
-          console.log(resp);
+          
       }, error => {
         console.log(error);
       });

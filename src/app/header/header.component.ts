@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HeaderComponent implements OnInit {
   cuenta: string = "Mi cuenta";
   level: string;
+  valor: string = '';
   user: string;
   constructor(private datos:DatosService, private router:Router, private msg:ToastrService) { }
 
@@ -30,4 +31,7 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
 
+  buscar(){
+    this.router.navigate(['/buscar/'+this.valor+''])
+  }
 }

@@ -9,10 +9,10 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 COMPUTADORAS
             </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="computadoras.html#alien">Alienware</a>
-                <a class="dropdown-item" href="computadoras.html#asus">Asus Gaming</a>
-                <a class="dropdown-item" href="computadoras.html#ss">Spaces Series</a>
+            <div class="dropdown-menu" >
+                <a class="dropdown-item" routerLink="/computadoras/alien">Alienware</a>
+                <a class="dropdown-item" routerLink="/computadoras/asus">Asus Gaming</a>
+                <a class="dropdown-item" routerLink="/computadoras/ss">Spaces Series</a>
             </div>
         </li>
 
@@ -21,9 +21,9 @@
                 HARDWARE
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="perifericos.html#mou">Mouses</a>
-                <a class="dropdown-item" href="perifericos.html#aud">Audio</a>
-                <a class="dropdown-item" href="perifericos.html#pan">Pantallas</a>
+                <a class="dropdown-item" routerLink="/hardware/Audio">Audio</a>
+                <a class="dropdown-item" routerLink="/hardware/Pantalla">Pantallas</a>
+                <a class="dropdown-item" routerLink="/hardware/Mouse">Mouses</a>
             </div>
         </li>
 
@@ -32,18 +32,19 @@
                 ACCESORIOS
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="accesorios.html#sil">Sillas gamer</a>
-                <a class="dropdown-item" href="accesorios.html#man">Mandos</a>
+                <a class="dropdown-item" routerLink="/accesorios/Sillas">Sillas gamer</a>
+                <a class="dropdown-item" routerLink="/accesorios/Mandos">Mandos</a>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="cooler.HTML">WATER COOLING</a>
+            <a class="nav-link" routerLink="/partes/Water Cooling">WATER COOLING</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Ecoweb.html">CONTACTOS</a>
+            <a class="nav-link" routerLink="/acerca">CONTACTOS</a>
         </li>
         <li class="nav-item" *ngIf="level=='A'" ><a class="nav-link text-light"  [routerLinkActive]="['activado']" routerLink="/usuarios"><b>USUARIOS</b></a></li>
         <li class="nav-item" *ngIf="level=='A'" ><a class="nav-link text-light"  [routerLinkActive]="['activado']" routerLink="/productos"><b>PRODUCTOS</b></a></li>
+        <li class="nav-item" *ngIf="level=='A'" ><a class="nav-link text-light"  [routerLinkActive]="['activado']" routerLink="/subscriptores"><b>SUBSCRIPTORES</b></a></li>
     </ul>
 
 </nav>

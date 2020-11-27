@@ -23,16 +23,16 @@ switch (JWT::verify($jwt, CONFIG::SECRET_JWT)) {
         exit();
         break;
 }
-$tabla = new DataBase('productos');
+$tabla = new DataBase('carritos');
 $data = JWT::get_data($jwt, CONFIG::SECRET_JWT);
 switch($_SERVER['REQUEST_METHOD']){
     case "GET":
-        if(isset($_GET['id_prod'])){
-            $where = array('id_prod'=>$_GET['id_prod']);
+        if(isset($_GET['id_car'])){
+            $where = array('id_car'=>$_GET['id_car']);
             $res = $tabla->Read($where);
-        }else if (isset($_GET['nombre_prod'])){
-            $prod = $_GET['nombre_prod'];
-            $sql = "SELECT * FROM productos where nombre_prod like '%$prod%'";
+        }else if (isset($_GET['user'])){
+            $prod = $_GET['user'];
+            $sql = "SELECT * FROM carritos where user = '$prod'";
             $res = $tabla->sql_execute($sql);
         }else{
             $res = $tabla->ReadAll();
@@ -40,21 +40,20 @@ switch($_SERVER['REQUEST_METHOD']){
         
         header("HTTP/1.1 200 OK");
         echo json_encode($res);
-    break;
+    break;  
     case "POST":
-        if(isset($_POST['nombre_prod']) && isset($_POST['precio_prod']) &&
-            isset($_POST['desc_prod']) && isset($_POST['categoria']) &&
-            isset($_POST['url_prod'])){
+        if(isset($_POST['user']) && isset($_POST['precio_car']) &&
+            isset($_POST['nombre_prod']) && isset($_POST['piezas_car']) && isset($_POST['id_prod'])){
             $datos = array(
                 'nombre_prod'=>$_POST['nombre_prod'],
-                'precio_prod'=>$_POST['precio_prod'],
-                'desc_prod'=>$_POST['desc_prod'],
-                'categoria'=>$_POST['categoria'],
-                'url_prod'=>$_POST['url_prod']
+                'precio_car'=>$_POST['precio_car'],
+                'piezas_car'=>$_POST['piezas_car'],
+                'id_prod'=>$_POST['id_prod'],
+                'user'=>$_POST['user']
             );
             try{
                 $reg = $tabla->create($datos);
-                $res = array("result"=>"ok","msg"=>"Se guardo el producto", "id"=>$reg);
+                $res = array("result"=>"ok","msg"=>"Se ha agregado a carrito", "id"=>$reg);
             }catch(PDOException $e){
                 $res = array("result"=>"no","msg"=>$e->getMessage());
             }
@@ -65,22 +64,13 @@ switch($_SERVER['REQUEST_METHOD']){
         echo json_encode($res);
     break;
     case "PUT":
-        if(isset($_GET['nombre_prod']) && isset($_GET['precio_prod']) &&
-            isset($_GET['desc_prod']) && isset($_GET['categoria']) &&
-            isset($_GET['url_prod']) && isset($_GET['id_prod'])){
-            if($data['level']=='A'){
-                $where = array('id_prod'=>$_GET['id_prod']);
-                $datos = array('nombre_prod'=>$_GET['nombre_prod'],
-                                'precio_prod'=>$_GET['precio_prod'],    
-                                'desc_prod'=>$_GET['desc_prod'],
-                                'categoria'=>$_GET['categoria'],
-                                'url_prod'=>$_GET['url_prod']
+        if(isset($_GET['piezas_car']) && isset($_GET['id_car'])){
+
+                $where = array('id_car'=>$_GET['id_car']);
+                $datos = array('piezas_car'=>$_GET['piezas_car']
                                 );
                 $reg = $tabla->update($datos,$where);
                 $res = array("result"=>"ok","msg"=>"Se guardo el Producto", "num"=>$reg);
-            } else {
-                $res = array("result"=>"no","msg"=>"Faltan datos");
-            }
         }else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }
@@ -88,15 +78,12 @@ switch($_SERVER['REQUEST_METHOD']){
         echo json_encode($res);
     break;
     case "DELETE":
-        if(isset($_GET['id_prod'])){
-            if($data['level']=='A'){
-                $where = array('id_prod'=>$_GET['id_prod']);
+        if(isset($_GET['id_prod']) && isset($_GET['user'])){
+                $where = array('id_prod'=>$_GET['id_prod'],
+                                'user'=>$_GET['user']);
                 $reg = $tabla->delete($where);
                 $res = array("result"=>"ok","msg"=>"Se elimino el mensaje", "num"=>$reg);
-            }else{
-                $res = array("result"=>"no","msg"=>"Faltan datos");
-            }
-           
+              
         }else{
             $res = array("result"=>"no","msg"=>"Faltan datos");
         }

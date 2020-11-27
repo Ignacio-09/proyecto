@@ -30,6 +30,7 @@
               "src/styles.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/css.css",
+              "src/assets/css/orgcss.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [

@@ -9,6 +9,9 @@
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{cuenta}}</button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" *ngIf="level=='U'" routerLink="/micuenta"><i class="fas fa-cog mr-1"></i>Mi cuenta</a>
+                    <a class="dropdown-item" *ngIf="level=='A'" routerLink="/usuarios"><i class="fa fa-users mr-1"></i>Usuarios</a>
+                    <a class="dropdown-item" *ngIf="level=='A'" routerLink="/productos"><i class="fas fa-cog mr-1"></i>Productos</a>
+                    <a class="dropdown-item" *ngIf="level=='A'" routerLink="/subscriptores"><i class="fas fa-bell mr-1"></i>Subscriptores</a>
                     <a class="dropdown-item" *ngIf="user==''" routerLink= "/login"><i class="fas fa-sign-in-alt mr-1"></i>Iniciar
                         sesión</a>
                     <a class="dropdown-item" *ngIf="user==''" routerLink= "/registro"><i class="fas fa-user-plus mr-1"></i>Registrase</a>
@@ -23,8 +26,8 @@
 <div class="row m-5">
     <div class="col-sm-4 text-center">
         <form class="form-inline mt-3" action="/action_page.php">
-            <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
-            <button class="btn btn-info" type="submit"><i class="fa fa-search mr-1"></i>Buscar</button>
+            <input class="form-control mr-sm-2" type="text" placeholder="Buscar" name="valor" [(ngModel)]='valor' (keyup)="buscar()"> 
+            <button (click)="buscar()" class="btn btn-info" type="submit"><i class="fa fa-search mr-1" ></i>Buscar</button>
         </form>
     </div>
     <!--Codigo posicion imagen-->
@@ -37,7 +40,7 @@
     </div>
     <!--Hipervinculo carrito-->
     <div class="col-sm-4 text-right">
-        <a class="navbar-brand" href="carrito.html">
+        <a class="navbar-brand" routerLink= "/carrito">
             <img src="../../assets/img/publicitario/carro.png" alt="Mi carrito" style="width:40px; color:black;">Mi carrito
         </a>
     </div>
